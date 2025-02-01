@@ -13,3 +13,13 @@ RunMode Utils::getAppRunMode(int argc, char* argv[]) {
     return RunMode::NORMAL;
 }
 
+std::string Utils::_printAnswersArray(const std::vector<std::string>& validAnswers) {
+    std::stringstream ss;
+    ss << "[";
+    for (size_t i = 0; i < validAnswers.size(); i++) {
+        ss << (i == 0 ? "" : ", ") << validAnswers[i];
+    }
+    ss << "]";
+    return ss.str();
+}
+
