@@ -14,6 +14,7 @@ public:
     static RunMode getAppRunMode(int argc, char* argv[]);
 private:
     static std::string _printAnswersArray(const std::vector<std::string>& validAnswers);
+    static std::string _toLower(const std::string& str);
 };
 
 #endif // UTILS_H
