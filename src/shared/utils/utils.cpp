@@ -23,3 +23,8 @@ std::string Utils::_printAnswersArray(const std::vector<std::string>& validAnswe
     return ss.str();
 }
 
+std::string Utils::_toLower(const std::string& str) {
+    std::string result = str;
+    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+    return result;
+}
