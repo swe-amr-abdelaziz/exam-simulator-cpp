@@ -39,3 +39,6 @@ jobs:
       - name: Run unit tests
         run: make test
 
+      - name: Run memory leak checks
+        run: make chech_memory_leaks
+
