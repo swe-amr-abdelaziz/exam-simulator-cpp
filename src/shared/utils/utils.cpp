@@ -28,10 +28,19 @@ std::string Utils::_toLower(const std::string& str) {
     std::transform(result.begin(), result.end(), result.begin(), ::tolower);
     return result;
 }
+
 std::string Utils::_trim(const std::string& str) {
     const std::string whitespaces = " \t\n\r\f\v";
     std::string result = str;
     result.erase(0, result.find_first_not_of(whitespaces));
     result.erase(result.find_last_not_of(whitespaces) + 1);
     return result;
+}
+
+std::string Utils::_formailzeAnswer(const std::string& answer, const bool& caseSensitive) {
+    std::string formalizedAnswer = _trim(answer);
+    if (!caseSensitive) {
+        formalizedAnswer = _toLower(formalizedAnswer);
+    }
+    return formalizedAnswer;
 }
