@@ -45,3 +45,8 @@ jobs:
       - name: Generate code coverage
         run: ./scripts/code_coverage.sh
 
+      - name: Upload code coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: code_coverage_report
+          path: coverage/*
