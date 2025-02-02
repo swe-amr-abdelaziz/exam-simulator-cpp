@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: amrswe/cpp-utils
+      options: --entrypoint /bin/bash
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
