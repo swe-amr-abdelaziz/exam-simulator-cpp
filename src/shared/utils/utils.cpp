@@ -13,6 +13,15 @@ RunMode Utils::getAppRunMode(int argc, char* argv[]) {
     return RunMode::NORMAL;
 }
 
+std::vector<std::string> Utils::split(std::string str, char delimiter) {
+    std::istringstream buffer(str);
+    std::string substr;
+    std::vector<std::string> vec = {};
+    while (getline(buffer, substr, delimiter))
+        vec.push_back(substr.c_str());
+    return vec;
+}
+
 std::string Utils::_printAnswersArray(const std::vector<std::string>& validAnswers) {
     std::stringstream ss;
     ss << "[";
