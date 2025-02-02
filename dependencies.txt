@@ -1,0 +1,7 @@
+build-essential
+clang-format
+cmake
+cppcheck
+lcov
+libgtest-dev
+valgrind
