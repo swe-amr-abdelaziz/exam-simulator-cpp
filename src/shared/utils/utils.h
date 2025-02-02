@@ -16,6 +16,7 @@ private:
     static std::string _printAnswersArray(const std::vector<std::string>& validAnswers);
     static std::string _toLower(const std::string& str);
     static std::string _trim(const std::string& str);
+    static std::string _formailzeAnswer(const std::string& answer, const bool& caseSensitive);
 };
 
 #endif // UTILS_H
