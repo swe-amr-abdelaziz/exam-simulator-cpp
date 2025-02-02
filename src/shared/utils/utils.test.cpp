@@ -55,4 +55,3 @@ TEST(SplitTest, given_string_with_custom_delimiter_then_returns_vector_of_string
         EXPECT_EQ(output[i], expected[i]);
     }
 }
-
