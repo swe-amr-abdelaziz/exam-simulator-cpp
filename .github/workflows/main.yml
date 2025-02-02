@@ -23,3 +23,6 @@ jobs:
       - name: Check files/folders naming conventions
         run: ./scripts/naming_convention_check.sh
 
+      - name: Check code formatting
+        run: ./scripts/code_formatting_check.sh
+
