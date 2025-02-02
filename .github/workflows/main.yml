@@ -42,3 +42,6 @@ jobs:
       - name: Run memory leak checks
         run: make check_memory_leaks
 
+      - name: Generate code coverage
+        run: ./scripts/code_coverage.sh
+
