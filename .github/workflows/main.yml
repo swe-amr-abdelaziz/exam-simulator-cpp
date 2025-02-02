@@ -18,15 +18,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Give execute permission to scripts
-      #   run: chmod +x ./scripts/*.sh
+      - name: Give execute permission to scripts
+        run: chmod +x ./scripts/*.sh
+
+      - name: Check files/folders naming conventions
+        run: ./scripts/naming_convention_check.sh
+
+      - name: Check code formatting
+        run: ./scripts/code_formatting_check.sh
+
+      - name: Static analysis with cppcheck
+        run: cppcheck --enable=all --inconclusive --check-config --xml --xml-version=2 --suppress=missingIncludeSystem . 2> cppcheck.xml
+
       #
-      # - name: Check files/folders naming conventions
-      #   run: ./scripts/naming_convention_check.sh
       #
-      # - name: Check code formatting
-      #   run: ./scripts/code_formatting_check.sh
       #
-      # - name: Static analysis with cppcheck
-      #   run: cppcheck --enable=all --inconclusive --check-config --xml --xml-version=2 --suppress=missingIncludeSystem . 2> cppcheck.xml
       #
