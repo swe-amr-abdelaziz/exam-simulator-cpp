@@ -12,6 +12,8 @@
 class Utils {
 public:
     static RunMode getAppRunMode(int argc, char* argv[]);
+    static std::vector<std::string> split(std::string str, char delimiter = '\n');
+
 private:
     static std::string _printAnswersArray(const std::vector<std::string>& validAnswers);
     static std::string _toLower(const std::string& str);
