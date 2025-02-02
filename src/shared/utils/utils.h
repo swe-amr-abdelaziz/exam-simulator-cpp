@@ -11,7 +11,7 @@
 
 class Utils {
 public:
-    static RunMode getAppRunMode(int argc, char* argv[]);
+    static RunMode getAppRunMode(const int& argc, char* argv[]);
     static std::vector<std::string> split(std::string str, char delimiter = '\n');
 
 private:

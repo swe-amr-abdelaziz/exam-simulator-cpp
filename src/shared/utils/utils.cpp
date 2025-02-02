@@ -1,6 +1,6 @@
 #include "utils.h"
 
-RunMode Utils::getAppRunMode(int argc, char* argv[]) {
+RunMode Utils::getAppRunMode(const int& argc, char* argv[]) {
     if (argc > 1) {
         std::string mode = argv[1];
         if (mode.compare(RUN_MODES.find(RunMode::TEST)->second) == 0) {
