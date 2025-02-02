@@ -20,3 +20,6 @@ jobs:
       - name: Give execute permission to scripts
         run: chmod +x ./scripts/*.sh
 
+      - name: Check files/folders naming conventions
+        run: ./scripts/naming_convention_check.sh
+
