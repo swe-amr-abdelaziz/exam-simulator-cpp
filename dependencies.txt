@@ -3,5 +3,6 @@ clang-format
 cmake
 cppcheck
 lcov
+libgmock-dev
 libgtest-dev
 valgrind
