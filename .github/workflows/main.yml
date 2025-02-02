@@ -36,3 +36,6 @@ jobs:
           name: cppcheck
           path: cppcheck.xml
 
+      - name: Run unit tests
+        run: make test
+
