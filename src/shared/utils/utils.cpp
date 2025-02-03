@@ -42,6 +42,16 @@ std::string Utils::askQuestion(const std::string& question,
     }
 }
 
+bool Utils::askBoolQuestion(const std::string& question,
+                            const std::vector<std::string>& validAnswers, bool caseSensitive) {
+    std::string answer = Utils::askQuestion(question, validAnswers, caseSensitive);
+    auto trueAnswer = validAnswers[0];
+    if (!caseSensitive) {
+        trueAnswer = _toLower(trueAnswer);
+    }
+    return answer.compare(trueAnswer) == 0;
+}
+
 std::vector<std::string> Utils::split(std::string str, char delimiter) {
     std::istringstream buffer(str);
     std::string substr;
