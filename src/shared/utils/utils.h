@@ -3,6 +3,7 @@
 
 #include "../enums/enums.h"
 #include <algorithm>
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <iostream>
 #include <sstream>
@@ -12,6 +13,9 @@
 class Utils {
 public:
     static RunMode getAppRunMode(const int& argc, char* argv[]);
+    static std::string askQuestion(const std::string& question,
+                                   const std::vector<std::string>& validAnswers = {},
+                                   bool caseSensitive = false);
     static std::vector<std::string> split(std::string str, char delimiter = '\n');
 
 private:
