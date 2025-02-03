@@ -13,6 +13,35 @@ RunMode Utils::getAppRunMode(const int& argc, char* argv[]) {
     return RunMode::NORMAL;
 }
 
+std::string Utils::askQuestion(const std::string& question,
+                               const std::vector<std::string>& validAnswers, bool caseSensitive) {
+    while (true) {
+        std::cout << question << '\n';
+        std::string answer;
+        std::getline(std::cin, answer);
+        answer = _formailzeAnswer(answer, caseSensitive);
+
+        if (validAnswers.empty()) {
+            return answer;
+        } // No validation needed
+
+        std::vector<std::string> formalizedAnswers = validAnswers;
+        std::transform(formalizedAnswers.begin(), formalizedAnswers.end(),
+                       formalizedAnswers.begin(), [caseSensitive](const std::string& answer) {
+                           return Utils::_formailzeAnswer(answer, caseSensitive);
+                       });
+
+        if (std::find(formalizedAnswers.begin(), formalizedAnswers.end(), answer) !=
+            formalizedAnswers.end()) {
+            return answer;
+        } else {
+            std::cout << "Invalid answer. Please choose from: " << _printAnswersArray(validAnswers)
+                      << " (case " << (caseSensitive ? "sensitive" : "insensitive") << ")" << std::endl
+                      << std::endl;
+        }
+    }
+}
+
 std::vector<std::string> Utils::split(std::string str, char delimiter) {
     std::istringstream buffer(str);
     std::string substr;
