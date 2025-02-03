@@ -22,10 +22,10 @@ public:
     static std::vector<std::string> split(std::string str, char delimiter = '\n');
 
 private:
-    static std::string _printAnswersArray(const std::vector<std::string>& validAnswers);
-    static std::string _toLower(const std::string& str);
-    static std::string _trim(const std::string& str);
-    static std::string _formailzeAnswer(const std::string& answer, const bool& caseSensitive);
+    static std::string printAnswersArray(const std::vector<std::string>& validAnswers);
+    static std::string toLower(const std::string& str);
+    static std::string trim(const std::string& str);
+    static std::string formailzeAnswer(const std::string& answer, const bool& caseSensitive);
 };
 
 #endif // UTILS_H

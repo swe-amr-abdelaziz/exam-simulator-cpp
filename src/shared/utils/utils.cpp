@@ -19,7 +19,7 @@ std::string Utils::askQuestion(const std::string& question,
         std::cout << question << '\n';
         std::string answer;
         std::getline(std::cin, answer);
-        answer = _formailzeAnswer(answer, caseSensitive);
+        answer = formailzeAnswer(answer, caseSensitive);
 
         if (validAnswers.empty()) {
             return answer;
@@ -28,14 +28,14 @@ std::string Utils::askQuestion(const std::string& question,
         std::vector<std::string> formalizedAnswers = validAnswers;
         std::transform(formalizedAnswers.begin(), formalizedAnswers.end(),
                        formalizedAnswers.begin(), [caseSensitive](const std::string& answer) {
-                           return Utils::_formailzeAnswer(answer, caseSensitive);
+                           return Utils::formailzeAnswer(answer, caseSensitive);
                        });
 
         if (std::find(formalizedAnswers.begin(), formalizedAnswers.end(), answer) !=
             formalizedAnswers.end()) {
             return answer;
         } else {
-            std::cout << "Invalid answer. Please choose from: " << _printAnswersArray(validAnswers)
+            std::cout << "Invalid answer. Please choose from: " << printAnswersArray(validAnswers)
                       << " (case " << (caseSensitive ? "sensitive" : "insensitive") << ")" << std::endl
                       << std::endl;
         }
@@ -47,7 +47,7 @@ bool Utils::askBoolQuestion(const std::string& question,
     std::string answer = Utils::askQuestion(question, validAnswers, caseSensitive);
     auto trueAnswer = validAnswers[0];
     if (!caseSensitive) {
-        trueAnswer = _toLower(trueAnswer);
+        trueAnswer = toLower(trueAnswer);
     }
     return answer.compare(trueAnswer) == 0;
 }
@@ -61,7 +61,7 @@ std::vector<std::string> Utils::split(std::string str, char delimiter) {
     return vec;
 }
 
-std::string Utils::_printAnswersArray(const std::vector<std::string>& validAnswers) {
+std::string Utils::printAnswersArray(const std::vector<std::string>& validAnswers) {
     std::stringstream ss;
     ss << "[";
     for (size_t i = 0; i < validAnswers.size(); i++) {
@@ -71,13 +71,13 @@ std::string Utils::_printAnswersArray(const std::vector<std::string>& validAnswe
     return ss.str();
 }
 
-std::string Utils::_toLower(const std::string& str) {
+std::string Utils::toLower(const std::string& str) {
     std::string result = str;
     std::transform(result.begin(), result.end(), result.begin(), ::tolower);
     return result;
 }
 
-std::string Utils::_trim(const std::string& str) {
+std::string Utils::trim(const std::string& str) {
     const std::string whitespaces = " \t\n\r\f\v";
     std::string result = str;
     result.erase(0, result.find_first_not_of(whitespaces));
@@ -85,10 +85,10 @@ std::string Utils::_trim(const std::string& str) {
     return result;
 }
 
-std::string Utils::_formailzeAnswer(const std::string& answer, const bool& caseSensitive) {
-    std::string formalizedAnswer = _trim(answer);
+std::string Utils::formailzeAnswer(const std::string& answer, const bool& caseSensitive) {
+    std::string formalizedAnswer = trim(answer);
     if (!caseSensitive) {
-        formalizedAnswer = _toLower(formalizedAnswer);
+        formalizedAnswer = toLower(formalizedAnswer);
     }
     return formalizedAnswer;
 }
