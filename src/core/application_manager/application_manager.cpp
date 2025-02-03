@@ -1,31 +1,31 @@
 #include "application_manager.h"
 
-ApplicationManager::ApplicationManager(RunMode runMode) : _runMode(runMode) {}
+ApplicationManager::ApplicationManager(RunMode runMode) : runMode(runMode) {}
 
 ApplicationManager::~ApplicationManager() {}
 
 int ApplicationManager::run() {
-    switch (_runMode) {
+    switch (this->runMode) {
         case RunMode::NORMAL:
-            return _run();
+            return this->runApp();
         case RunMode::TEST:
-            return _test();
+            return this->runTests();
         case RunMode::GENERATE_QUESTIONS:
-            return _generateQuestions();
+            return this->generateQuestions();
         default:
             std::cerr << "Unknown run mode!" << std::endl;
             return 1;
     }
 }
 
-int ApplicationManager::_run() {
+int ApplicationManager::runApp() {
     return 0;
 }
 
-int ApplicationManager::_test() {
+int ApplicationManager::runTests() {
     return RUN_ALL_TESTS();
 }
 
-int ApplicationManager::_generateQuestions() {
+int ApplicationManager::generateQuestions() {
     return 0;
 }

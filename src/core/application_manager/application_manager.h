@@ -14,10 +14,10 @@ public:
     int run();
 
 private:
-    RunMode _runMode;
-    int _run();
-    int _test();
-    int _generateQuestions();
+    RunMode runMode;
+    int runApp();
+    int runTests();
+    int generateQuestions();
 };
 
 #endif // APPLICATION_MANAGER_H
