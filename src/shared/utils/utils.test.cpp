@@ -172,3 +172,75 @@ TEST(AskQuestionTest, given_vaild_answers_then_enters_a_valid_answer_from_3rd_tr
     EXPECT_EQ(consoleOutput[6], prompt);
 }
 
+TEST(AskBoolQuestionTest,
+     given_vaild_answers_then_enters_a_valid_answer_immediately_case_insensitive_and_returns_true) {
+    std::string input = "Y";
+    std::string prompt = "Are you a software engineer?";
+    std::vector<std::string> validAnswers = {"y", "n"};
+    std::tuple<bool, std::string> tuple =
+        getFunctionOutput<bool>(Utils::askBoolQuestion, input, prompt, validAnswers, false);
+    EXPECT_EQ(std::get<0>(tuple), true);
+    std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
+    EXPECT_EQ(consoleOutput[0], prompt);
+}
+
+TEST(AskBoolQuestionTest,
+     given_vaild_answers_then_enters_a_valid_answer_with_white_space_immediately_case_insensitive_and_returns_false) {
+    std::string input = "   NO   ";
+    std::string prompt = "Are you a software engineer?";
+    std::vector<std::string> validAnswers = {"YES", "NO"};
+    std::tuple<bool, std::string> tuple =
+        getFunctionOutput<bool>(Utils::askBoolQuestion, input, prompt, validAnswers, true);
+    EXPECT_EQ(std::get<0>(tuple), false);
+    std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
+    EXPECT_EQ(consoleOutput[0], prompt);
+}
+
+TEST(AskBoolQuestionTest,
+     given_vaild_answers_then_enters_a_valid_answer_from_2nd_trial_case_insensitive_and_returns_false) {
+    std::string input = "FALSE\nNO";
+    std::string prompt = "Are you a software engineer?";
+    std::vector<std::string> validAnswers = {"yes", "no"};
+    std::tuple<bool, std::string> tuple =
+        getFunctionOutput<bool>(Utils::askBoolQuestion, input, prompt, validAnswers, false);
+    std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
+
+    EXPECT_EQ(std::get<0>(tuple), false);
+    EXPECT_EQ(consoleOutput.size(), 4);
+    EXPECT_EQ(consoleOutput[0], prompt);
+
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("Invalid answer"));
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("Please choose from: [yes, no]"));
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("case insensitive"));
+
+    EXPECT_EQ(consoleOutput[2], "");
+    EXPECT_EQ(consoleOutput[3], prompt);
+}
+
+TEST(AskBoolQuestionTest,
+     given_vaild_answers_then_enters_a_valid_answer_from_3rd_trial_case_sensitive_and_returns_true) {
+    std::string input = "yes\ntrue\nTrue";
+    std::string prompt = "Are you a software engineer?";
+    std::vector<std::string> validAnswers = {"True", "False"};
+    std::tuple<bool, std::string> tuple =
+        getFunctionOutput<bool>(Utils::askBoolQuestion, input, prompt, validAnswers, true);
+    std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
+
+    EXPECT_EQ(std::get<0>(tuple), true);
+    EXPECT_EQ(consoleOutput.size(), 7);
+    EXPECT_EQ(consoleOutput[0], prompt);
+
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("Invalid answer"));
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("Please choose from: [True, False]"));
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("case sensitive"));
+
+    EXPECT_EQ(consoleOutput[2], "");
+    EXPECT_EQ(consoleOutput[3], prompt);
+
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("Invalid answer"));
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("Please choose from: [True, False]"));
+    EXPECT_THAT(consoleOutput[1], testing::HasSubstr("case sensitive"));
+
+    EXPECT_EQ(consoleOutput[5], "");
+    EXPECT_EQ(consoleOutput[6], prompt);
+}
