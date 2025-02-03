@@ -1,8 +1,8 @@
 #ifndef APPLICATION_MANAGER_H
 #define APPLICATION_MANAGER_H
 
-#include "src/shared/enums/enums.h"
-#include "src/shared/utils/utils.h"
+#include "../../shared/enums/enums.h"
+#include "../../shared/utils/utils.h"
 #include <gtest/gtest.h>
 #include <iostream>
 #include <memory>
