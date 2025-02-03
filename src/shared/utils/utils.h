@@ -16,6 +16,9 @@ public:
     static std::string askQuestion(const std::string& question,
                                    const std::vector<std::string>& validAnswers = {},
                                    bool caseSensitive = false);
+    static bool askBoolQuestion(const std::string& question,
+                                const std::vector<std::string>& validAnswers = {"y", "n"},
+                                bool caseSensitive = false);
     static std::vector<std::string> split(std::string str, char delimiter = '\n');
 
 private:
