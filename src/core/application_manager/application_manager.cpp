@@ -13,8 +13,7 @@ int ApplicationManager::run() {
         case RunMode::GENERATE_QUESTIONS:
             return this->generateQuestions();
         default:
-            std::cerr << "Unknown run mode!" << std::endl;
-            return 1;
+            throw std::runtime_error("Invalid run mode");
     }
 }
 
