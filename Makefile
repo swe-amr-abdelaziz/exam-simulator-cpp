@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS := -fdiagnostics-color=always -g -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -std=c++17
-LDFLAGS := -lgtest -lgtest_main -pthread
+LDFLAGS := -lgtest -lgtest_main -lgmock -lgmock_main -pthread
 CCOV := -fprofile-arcs -ftest-coverage -O0
 
 TARGET = build/exam_simulator
