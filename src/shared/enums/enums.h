@@ -16,4 +16,8 @@ const std::map<RunMode, std::string> RUN_MODES = {
     {RunMode::GENERATE_QUESTIONS, "generate_questions"},
 };
 
+enum QuestionType {
+    MCQ,
+};
+
 #endif // ENUMS_H
