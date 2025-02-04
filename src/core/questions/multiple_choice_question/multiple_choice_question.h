@@ -13,9 +13,14 @@ public:
                            std::vector<std::string> choices = {});
     ~MultipleChoiceQuestion();
     bool isCorrect() override;
+    std::string ask(const unsigned short& index) override;
+    void printWithCorrection(const unsigned short& index) override;
+    void shuffleAnswers();
 
 private:
     std::vector<std::string> choices;
+    std::tuple<std::string, std::vector<std::string>>
+        getQuestionTextWithValidAnswers(const unsigned short& index);
     void calculateStudentDegree() override;
 };
 
