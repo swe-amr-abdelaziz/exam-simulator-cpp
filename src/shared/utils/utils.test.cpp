@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "gmock/gmock.h"
 
 template <typename T>
 std::tuple<T, std::string>
@@ -45,30 +46,21 @@ B
 C)";
     std::vector<std::string> expected = {"A", "B", "C"};
     auto output = Utils::split(input);
-    EXPECT_EQ(output.size(), expected.size());
-    for (size_t i = 0; i < output.size(); i++) {
-        EXPECT_EQ(output[i], expected[i]);
-    }
+    ASSERT_THAT(output, testing::ElementsAreArray(expected));
 }
 
 TEST(SplitTest, given_string_with_custom_delimiter_then_returns_vector_of_one_string) {
     std::string input = "A,B,C";
     std::vector<std::string> expected = {"A,B,C"};
     auto output = Utils::split(input, ' ');
-    EXPECT_EQ(output.size(), expected.size());
-    for (size_t i = 0; i < output.size(); i++) {
-        EXPECT_EQ(output[i], expected[i]);
-    }
+    ASSERT_THAT(output, testing::ElementsAreArray(expected));
 }
 
 TEST(SplitTest, given_string_with_custom_delimiter_then_returns_vector_of_strings) {
     std::string input = "A,B,C";
     std::vector<std::string> expected = {"A", "B", "C"};
     auto output = Utils::split(input, ',');
-    EXPECT_EQ(output.size(), expected.size());
-    for (size_t i = 0; i < output.size(); i++) {
-        EXPECT_EQ(output[i], expected[i]);
-    }
+    ASSERT_THAT(output, testing::ElementsAreArray(expected));
 }
 
 TEST(AskQuestionTest, given_no_vaild_answers_then_no_validation_needed_case_insensitive) {
@@ -78,7 +70,7 @@ TEST(AskQuestionTest, given_no_vaild_answers_then_no_validation_needed_case_inse
         getFunctionOutput<std::string>(Utils::askQuestion, input, prompt, {}, false);
     EXPECT_EQ(std::get<0>(tuple), "i am fine, thanks");
     std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
-    EXPECT_EQ(consoleOutput[0], prompt);
+    ASSERT_THAT(consoleOutput, testing::ElementsAre(prompt));
 }
 
 TEST(AskQuestionTest, given_no_vaild_answers_then_no_validation_needed_case_sensitive) {
@@ -88,7 +80,7 @@ TEST(AskQuestionTest, given_no_vaild_answers_then_no_validation_needed_case_sens
         getFunctionOutput<std::string>(Utils::askQuestion, input, prompt, {}, true);
     EXPECT_EQ(std::get<0>(tuple), "I AM FINE, THANKS");
     std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
-    EXPECT_EQ(consoleOutput[0], prompt);
+    ASSERT_THAT(consoleOutput, testing::ElementsAre(prompt));
 }
 
 TEST(AskQuestionTest, given_vaild_answers_then_enters_a_valid_answer_immediately_case_insensitive) {
@@ -99,7 +91,7 @@ TEST(AskQuestionTest, given_vaild_answers_then_enters_a_valid_answer_immediately
         getFunctionOutput<std::string>(Utils::askQuestion, input, prompt, validAnswers, false);
     EXPECT_EQ(std::get<0>(tuple), "yes");
     std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
-    EXPECT_EQ(consoleOutput[0], prompt);
+    ASSERT_THAT(consoleOutput, testing::ElementsAre(prompt));
 }
 
 TEST(AskQuestionTest, given_vaild_answers_then_enters_a_valid_answer_immediately_case_sensitive) {
@@ -110,7 +102,7 @@ TEST(AskQuestionTest, given_vaild_answers_then_enters_a_valid_answer_immediately
         getFunctionOutput<std::string>(Utils::askQuestion, input, prompt, validAnswers, true);
     EXPECT_EQ(std::get<0>(tuple), "yes");
     std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
-    EXPECT_EQ(consoleOutput[0], prompt);
+    ASSERT_THAT(consoleOutput, testing::ElementsAre(prompt));
 }
 
 TEST(AskQuestionTest,
@@ -122,7 +114,7 @@ TEST(AskQuestionTest,
         getFunctionOutput<std::string>(Utils::askQuestion, input, prompt, validAnswers, true);
     EXPECT_EQ(std::get<0>(tuple), "yes");
     std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
-    EXPECT_EQ(consoleOutput[0], prompt);
+    ASSERT_THAT(consoleOutput, testing::ElementsAre(prompt));
 }
 
 TEST(AskQuestionTest, given_vaild_answers_then_enters_a_valid_answer_from_2nd_trial_case_insensitive) {
@@ -181,7 +173,7 @@ TEST(AskBoolQuestionTest,
         getFunctionOutput<bool>(Utils::askBoolQuestion, input, prompt, validAnswers, false);
     EXPECT_EQ(std::get<0>(tuple), true);
     std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
-    EXPECT_EQ(consoleOutput[0], prompt);
+    ASSERT_THAT(consoleOutput, testing::ElementsAre(prompt));
 }
 
 TEST(AskBoolQuestionTest,
@@ -193,7 +185,7 @@ TEST(AskBoolQuestionTest,
         getFunctionOutput<bool>(Utils::askBoolQuestion, input, prompt, validAnswers, true);
     EXPECT_EQ(std::get<0>(tuple), false);
     std::vector<std::string> consoleOutput = Utils::split(std::get<1>(tuple));
-    EXPECT_EQ(consoleOutput[0], prompt);
+    ASSERT_THAT(consoleOutput, testing::ElementsAre(prompt));
 }
 
 TEST(AskBoolQuestionTest,
