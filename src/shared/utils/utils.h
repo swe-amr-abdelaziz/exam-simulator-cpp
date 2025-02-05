@@ -20,6 +20,8 @@ public:
                                 const std::vector<std::string>& validAnswers = {"y", "n"},
                                 bool caseSensitive = false);
     static std::vector<std::string> split(std::string str, char delimiter = '\n');
+    static char convertIndexToChoiceChar(int index);
+    static int convertChoiceCharToIndex(char ch);
 
 private:
     static std::string printAnswersArray(const std::vector<std::string>& validAnswers);
