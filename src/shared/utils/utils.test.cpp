@@ -1,5 +1,4 @@
 #include "utils.h"
-#include "gmock/gmock.h"
 
 TEST(GetAppRunModeTest, given_no_argv_then_returns_normal) {
     int argc = 1;
