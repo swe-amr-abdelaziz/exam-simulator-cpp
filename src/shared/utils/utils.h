@@ -23,6 +23,36 @@ public:
     static char convertIndexToChoiceChar(int index);
     static int convertChoiceCharToIndex(char ch);
 
+    template <typename F, typename... Args>
+    static auto invokeAndCaptureOutput(F&& func, std::string input, Args&&... args) {
+        // Detect the return type of the function
+        using Ret = std::invoke_result_t<F, Args...>;
+        Ret funcOutput;
+
+        // Simulate the user input
+        std::istringstream inputBuffer(input);
+        std::streambuf* cinBuffer = std::cin.rdbuf(inputBuffer.rdbuf());
+
+        // Start capturing the console output
+        testing::internal::CaptureStdout();
+
+        if constexpr (std::is_void_v<Ret>) {
+            std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
+        } else {
+            funcOutput = std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
+        }
+
+        // Stop capturing the console output
+        std::cin.rdbuf(cinBuffer);
+        std::string consoleOutput = testing::internal::GetCapturedStdout();
+
+        // Return the function and console outputs
+        if constexpr (std::is_void_v<Ret>) {
+            return std::make_tuple(nullptr, consoleOutput);
+        }
+        return std::make_tuple(funcOutput, consoleOutput);
+    }
+
 private:
     static std::string printAnswersArray(const std::vector<std::string>& validAnswers);
     static std::string toLower(const std::string& str);
