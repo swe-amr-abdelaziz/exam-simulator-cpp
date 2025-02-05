@@ -236,3 +236,89 @@ TEST(AskBoolQuestionTest,
     EXPECT_EQ(consoleOutput[5], "");
     EXPECT_EQ(consoleOutput[6], prompt);
 }
+
+TEST(ConvertIndexToCharTest, given_index_0_then_returns_A) {
+    char output = Utils::convertIndexToChoiceChar(0);
+    EXPECT_EQ(output, 'A');
+}
+
+TEST(ConvertIndexToCharTest, given_index_4_then_returns_E) {
+    char output = Utils::convertIndexToChoiceChar(4);
+    EXPECT_EQ(output, 'E');
+}
+
+TEST(ConvertIndexToCharTest, given_invalid_index_less_than_zero_then_throws_invalid_argument) {
+    EXPECT_THROW(
+        {
+            try {
+                Utils::convertIndexToChoiceChar(-1);
+            } catch (const std::exception& ex) {
+                EXPECT_STREQ("Invalid index, must be between 0 and 25", ex.what());
+                throw;
+            }
+        },
+        std::exception);
+}
+
+TEST(ConvertIndexToCharTest, given_invalid_index_greater_than_25_then_throws_invalid_argument) {
+    EXPECT_THROW(
+        {
+            try {
+                Utils::convertIndexToChoiceChar(26);
+            } catch (const std::exception& ex) {
+                EXPECT_STREQ("Invalid index, must be between 0 and 25", ex.what());
+                throw;
+            }
+        },
+        std::exception);
+}
+
+TEST(ConvertChoiceCharToIndexTest, given_A_then_returns_0) {
+    int output = Utils::convertChoiceCharToIndex('A');
+    EXPECT_EQ(output, 0);
+}
+
+TEST(ConvertChoiceCharToIndexTest, given_E_then_returns_4) {
+    int output = Utils::convertChoiceCharToIndex('E');
+    EXPECT_EQ(output, 4);
+}
+
+TEST(ConvertChoiceCharToIndexTest, given_r_then_returns_17) {
+    int output = Utils::convertChoiceCharToIndex('r');
+    EXPECT_EQ(output, 17);
+}
+
+TEST(ConvertChoiceCharToIndexTest, given_z_then_returns_25) {
+    int output = Utils::convertChoiceCharToIndex('z');
+    EXPECT_EQ(output, 25);
+}
+
+TEST(ConvertChoiceCharToIndexTest, given_number_instead_of_alphabet_char_then_throws_invalid_argument) {
+    EXPECT_THROW(
+        {
+            try {
+                Utils::convertChoiceCharToIndex('2');
+            } catch (const std::exception& ex) {
+                EXPECT_STREQ("Invalid choice character, must be between A and Z (case insensitive)",
+                             ex.what());
+                throw;
+            }
+        },
+        std::exception);
+}
+
+TEST(ConvertChoiceCharToIndexTest,
+     given_special_character_instead_of_alphabet_char_then_throws_invalid_argument) {
+    EXPECT_THROW(
+        {
+            try {
+                Utils::convertChoiceCharToIndex('@');
+            } catch (const std::exception& ex) {
+                EXPECT_STREQ("Invalid choice character, must be between A and Z (case insensitive)",
+                             ex.what());
+                throw;
+            }
+        },
+        std::exception);
+}
+
