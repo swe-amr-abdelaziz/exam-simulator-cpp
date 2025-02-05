@@ -65,7 +65,7 @@ char Utils::convertIndexToChoiceChar(int index) {
     if (!(index >= 0 && index <= 25)) {
         throw std::invalid_argument("Invalid index, must be between 0 and 25");
     }
-    return (char) (static_cast<int>('A') + index);
+    return static_cast<char>(static_cast<int>('A') + index);
 }
 
 int Utils::convertChoiceCharToIndex(char ch) {

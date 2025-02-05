@@ -23,7 +23,7 @@ std::string MultipleChoiceQuestion::ask(const unsigned short& index) {
 }
 
 void MultipleChoiceQuestion::printWithCorrection(const unsigned short& index) {
-    this->studentAnswer->setDegree((double) index);
+    this->studentAnswer->setDegree(static_cast<double>(index));
 }
 
 void MultipleChoiceQuestion::shuffleAnswers() {}
