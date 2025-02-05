@@ -1,8 +1,8 @@
 #ifndef MULTIPLE_CHOICE_QUESTION_H
 #define MULTIPLE_CHOICE_QUESTION_H
 
-#include "../base_question/base_question.h"
-#include "multiple_choice_answer.h"
+#include "../../base_question/question/base_question.h"
+#include "../answer/multiple_choice_answer.h"
 #include <tuple>
 #include <vector>
 

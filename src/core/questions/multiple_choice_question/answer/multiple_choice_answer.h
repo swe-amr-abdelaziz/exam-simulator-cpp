@@ -1,7 +1,7 @@
 #ifndef MULTIPLE_CHOICE_ANSWER_H
 #define MULTIPLE_CHOICE_ANSWER_H
 
-#include "../base_question/base_answer.h"
+#include "../../base_question/answer/base_answer.h"
 #include "gmock/gmock.h"
 #include <algorithm>
 

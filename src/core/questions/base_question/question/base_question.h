@@ -1,8 +1,8 @@
 #ifndef BASE_QUESTION_H
 #define BASE_QUESTION_H
 
-#include "../../../shared/enums/enums.h"
-#include "base_answer.h"
+#include "../../../../shared/enums/enums.h"
+#include "../answer/base_answer.h"
 #include "base_question_interface.h"
 #include <memory>
 
