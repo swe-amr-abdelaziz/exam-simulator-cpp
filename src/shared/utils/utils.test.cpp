@@ -321,4 +321,3 @@ TEST(ConvertChoiceCharToIndexTest,
         },
         std::exception);
 }
-
