@@ -2,7 +2,7 @@
 
 static std::vector<std::string> choices = {"Cairo", "Alexandria", "Giza", "Luxor"};
 
-TEST(MultipleChoiceQuestionTest, given_mcq_data_with_correct_student_answer_then_mcq_is_correct) {
+TEST(IsCorrectTest, given_mcq_data_with_correct_student_answer_then_mcq_is_correct) {
     std::unique_ptr<MultipleChoiceAnswer> correctAnswer =
         std::make_unique<MultipleChoiceAnswer>(choices, 0, 5);
     std::unique_ptr<MultipleChoiceAnswer> studentAnswer =
@@ -13,7 +13,7 @@ TEST(MultipleChoiceQuestionTest, given_mcq_data_with_correct_student_answer_then
     EXPECT_TRUE(question->isCorrect());
 }
 
-TEST(MultipleChoiceQuestionTest, given_mcq_data_with_incorrect_student_answer_then_mcq_is_incorrect) {
+TEST(IsCorrectTest, given_mcq_data_with_incorrect_student_answer_then_mcq_is_incorrect) {
     std::unique_ptr<MultipleChoiceAnswer> correctAnswer =
         std::make_unique<MultipleChoiceAnswer>(choices, 0, 5);
     std::unique_ptr<MultipleChoiceAnswer> studentAnswer =
