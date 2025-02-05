@@ -77,13 +77,13 @@ int Utils::convertChoiceCharToIndex(char ch) {
 }
 
 std::string Utils::printAnswersArray(const std::vector<std::string>& validAnswers) {
-    std::stringstream ss;
-    ss << "[";
-    for (size_t i = 0; i < validAnswers.size(); i++) {
-        ss << (i == 0 ? "" : ", ") << validAnswers[i];
+    std::ostringstream oss;
+    oss << "[";
+    for (size_t i = 0; i < validAnswers.size(); ++i) {
+        oss << (i == 0 ? "" : ", ") << validAnswers[i];
     }
-    ss << "]";
-    return ss.str();
+    oss << "]";
+    return oss.str();
 }
 
 std::string Utils::toLower(const std::string& str) {
