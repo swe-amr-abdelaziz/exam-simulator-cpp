@@ -32,7 +32,18 @@ void MultipleChoiceQuestion::printWithCorrection(const unsigned short& index) {
     auto answer = Utils::askQuestion(questionBody);
 }
 
-void MultipleChoiceQuestion::shuffleAnswers() {}
+void MultipleChoiceQuestion::shuffleAnswers() {
+    auto indexArray = Utils::generateIndices(static_cast<unsigned short>(this->choices.size()), true);
+    std::vector<std::string> originalChoices(this->choices);
+    bool correctAnswerUpdated = false;
+    for (size_t i = 0; i < this->choices.size(); ++i) {
+        this->choices[i] = originalChoices[indexArray[i]];
+        if (!correctAnswerUpdated && this->correctAnswer->getText().value() == indexArray[i]) {
+            this->correctAnswer->setText(static_cast<uint8_t>(i));
+            correctAnswerUpdated = true;
+        }
+    }
+}
 
 std::tuple<std::string, std::vector<std::string>>
     MultipleChoiceQuestion::getQuestionTextWithValidAnswers(const unsigned short& index, bool withCorrection) {
