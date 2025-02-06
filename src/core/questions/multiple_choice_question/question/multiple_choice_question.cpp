@@ -24,7 +24,12 @@ void MultipleChoiceQuestion::ask(const unsigned short& index) {
 }
 
 void MultipleChoiceQuestion::printWithCorrection(const unsigned short& index) {
-    this->studentAnswer->setDegree(static_cast<double>(index));
+    if (this->isCorrect()) {
+        throw std::runtime_error(
+            "This method should not be called when the student answer is correct");
+    }
+    auto [questionBody, validAnswers] = this->getQuestionTextWithValidAnswers(index, true);
+    auto answer = Utils::askQuestion(questionBody);
 }
 
 void MultipleChoiceQuestion::shuffleAnswers() {}

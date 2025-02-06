@@ -118,3 +118,83 @@ TEST(AskTest, given_mcq_data_with_five_choices_then_incorrect_answer_is_provided
     EXPECT_EQ(consoleOutput, expectedOutput);
     EXPECT_FALSE(question->isCorrect());
 }
+
+TEST(PrintWithCorrectionTest,
+     given_mcq_data_with_three_choices_and_correct_answer_is_provided_then_throws_exception) {
+    EXPECT_THROW(
+        {
+            try {
+                std::vector<std::string> subChoices(&choices[0], &choices[3]);
+                std::unique_ptr<MultipleChoiceAnswer> correctAnswer =
+                    std::make_unique<MultipleChoiceAnswer>(subChoices, correctAnswerIndex,
+                                                           correctAnswerDegree);
+                auto studentAnswerIndex = Utils::convertChoiceCharToIndex('a');
+                std::unique_ptr<MultipleChoiceAnswer> studentAnswer =
+                    std::make_unique<MultipleChoiceAnswer>(subChoices, studentAnswerIndex);
+                std::unique_ptr<IQuestion> question =
+                    std::make_unique<MultipleChoiceQuestion>("What is the capital of Egypt?",
+                                                             std::move(correctAnswer),
+                                                             std::move(studentAnswer), subChoices);
+                uint8_t questionIndex = 5;
+                question->printWithCorrection(questionIndex);
+            } catch (const std::exception& ex) {
+                EXPECT_STREQ("This method should not be called when the student answer is correct",
+                             ex.what());
+                throw;
+            }
+        },
+        std::exception);
+}
+
+TEST(PrintWithCorrectionTest,
+     given_mcq_data_with_four_choices_and_incorrect_answer_is_provided_then_prints_the_answer_feedback) {
+    std::vector<std::string> subChoices(&choices[0], &choices[4]);
+    std::unique_ptr<MultipleChoiceAnswer> correctAnswer =
+        std::make_unique<MultipleChoiceAnswer>(subChoices, correctAnswerIndex, correctAnswerDegree);
+    auto studentAnswerIndex = Utils::convertChoiceCharToIndex('c');
+    std::unique_ptr<MultipleChoiceAnswer> studentAnswer =
+        std::make_unique<MultipleChoiceAnswer>(subChoices, studentAnswerIndex);
+    std::unique_ptr<IQuestion> question =
+        std::make_unique<MultipleChoiceQuestion>("What is the capital of Egypt?", std::move(correctAnswer),
+                                                 std::move(studentAnswer), subChoices);
+    uint8_t questionIndex = 10;
+    auto [funcOutput, consoleOutput] =
+        Utils::invokeAndCaptureOutput(&IQuestion::printWithCorrection, "\n", question.get(), questionIndex);
+    std::string expectedOutput = R"(11. What is the capital of Egypt?
+    A. Cairo  ✅
+    B. Giza
+    C. Alexandria  ❌
+    D. Mansoura
+
+Press enter to continue
+)";
+    EXPECT_EQ(consoleOutput, expectedOutput);
+    EXPECT_FALSE(question->isCorrect());
+}
+
+TEST(PrintWithCorrectionTest,
+     given_mcq_data_with_five_choices_and_incorrect_answer_is_provided_then_prints_the_answer_feedback) {
+    std::vector<std::string> subChoices(&choices[0], &choices[5]);
+    std::unique_ptr<MultipleChoiceAnswer> correctAnswer =
+        std::make_unique<MultipleChoiceAnswer>(subChoices, correctAnswerIndex, correctAnswerDegree);
+    auto studentAnswerIndex = Utils::convertChoiceCharToIndex('e');
+    std::unique_ptr<MultipleChoiceAnswer> studentAnswer =
+        std::make_unique<MultipleChoiceAnswer>(subChoices, studentAnswerIndex);
+    std::unique_ptr<IQuestion> question =
+        std::make_unique<MultipleChoiceQuestion>("What is the capital of Egypt?", std::move(correctAnswer),
+                                                 std::move(studentAnswer), subChoices);
+    uint8_t questionIndex = 100;
+    auto [funcOutput, consoleOutput] =
+        Utils::invokeAndCaptureOutput(&IQuestion::printWithCorrection, "\n", question.get(), questionIndex);
+    std::string expectedOutput = R"(101. What is the capital of Egypt?
+     A. Cairo  ✅
+     B. Giza
+     C. Alexandria
+     D. Mansoura
+     E. Luxor  ❌
+
+Press enter to continue
+)";
+    EXPECT_EQ(consoleOutput, expectedOutput);
+    EXPECT_FALSE(question->isCorrect());
+}
