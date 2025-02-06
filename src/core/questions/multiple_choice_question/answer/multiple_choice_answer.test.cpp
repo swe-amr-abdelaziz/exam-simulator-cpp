@@ -8,6 +8,14 @@ TEST(MultipleChoiceAnswerTest, initialize_multiple_choice_answer_with_valid_choi
     ASSERT_THAT(answer->getChoices(), testing::ElementsAre("Apple", "Orange", "Banana", "Mango"));
 }
 
+TEST(MultipleChoiceAnswerTest, set_multiple_choice_answer_with_valid_choices) {
+    std::vector<std::string> myChoices1 = {"Apple", "Orange", "Banana"};
+    std::unique_ptr<MultipleChoiceAnswer> answer = std::make_unique<MultipleChoiceAnswer>(myChoices1);
+    std::vector<std::string> myChoices2 = {"Apple", "Orange", "Banana", "Mango"};
+    answer->setChoices(myChoices2);
+    ASSERT_THAT(answer->getChoices(), testing::ElementsAre("Apple", "Orange", "Banana", "Mango"));
+}
+
 TEST(MultipleChoiceAnswerTest, initialize_multiple_choice_answer_with_invalid_choices_less_than_2) {
     std::vector<std::string> invalidChoices = {"Apple", "Orange"};
     EXPECT_THROW(
