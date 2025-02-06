@@ -61,19 +61,21 @@ std::vector<std::string> Utils::split(std::string str, char delimiter) {
     return vec;
 }
 
-char Utils::convertIndexToChoiceChar(int index) {
-    if (!(index >= 0 && index <= 25)) {
+char Utils::convertIndexToChoiceChar(uint8_t index) {
+    if (index > 25) {
         throw std::invalid_argument("Invalid index, must be between 0 and 25");
     }
-    return static_cast<char>(static_cast<int>('A') + index);
+    return static_cast<char>(static_cast<uint8_t>('A') + index);
 }
 
-int Utils::convertChoiceCharToIndex(char ch) {
-    if (!(std::toupper(ch) >= 'A' && std::toupper(ch) <= 'Z')) {
+uint8_t Utils::convertChoiceCharToIndex(char ch) {
+    auto charCode = std::toupper(ch);
+    if (!(charCode >= 'A' && charCode <= 'Z')) {
         throw std::invalid_argument(
             "Invalid choice character, must be between A and Z (case insensitive)");
     }
-    return static_cast<int>(std::toupper(ch)) - static_cast<int>('A');
+    int index = charCode - 'A';
+    return static_cast<uint8_t>(index < 0 ? 0 : index);
 }
 
 std::string Utils::printAnswersArray(const std::vector<std::string>& validAnswers) {

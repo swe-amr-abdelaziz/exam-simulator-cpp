@@ -233,19 +233,6 @@ TEST(ConvertIndexToCharTest, given_index_4_then_returns_E) {
     EXPECT_EQ(output, 'E');
 }
 
-TEST(ConvertIndexToCharTest, given_invalid_index_less_than_zero_then_throws_invalid_argument) {
-    EXPECT_THROW(
-        {
-            try {
-                Utils::convertIndexToChoiceChar(-1);
-            } catch (const std::exception& ex) {
-                EXPECT_STREQ("Invalid index, must be between 0 and 25", ex.what());
-                throw;
-            }
-        },
-        std::exception);
-}
-
 TEST(ConvertIndexToCharTest, given_invalid_index_greater_than_25_then_throws_invalid_argument) {
     EXPECT_THROW(
         {
@@ -260,22 +247,22 @@ TEST(ConvertIndexToCharTest, given_invalid_index_greater_than_25_then_throws_inv
 }
 
 TEST(ConvertChoiceCharToIndexTest, given_A_then_returns_0) {
-    int output = Utils::convertChoiceCharToIndex('A');
+    uint8_t output = Utils::convertChoiceCharToIndex('A');
     EXPECT_EQ(output, 0);
 }
 
 TEST(ConvertChoiceCharToIndexTest, given_E_then_returns_4) {
-    int output = Utils::convertChoiceCharToIndex('E');
+    uint8_t output = Utils::convertChoiceCharToIndex('E');
     EXPECT_EQ(output, 4);
 }
 
 TEST(ConvertChoiceCharToIndexTest, given_r_then_returns_17) {
-    int output = Utils::convertChoiceCharToIndex('r');
+    uint8_t output = Utils::convertChoiceCharToIndex('r');
     EXPECT_EQ(output, 17);
 }
 
 TEST(ConvertChoiceCharToIndexTest, given_z_then_returns_25) {
-    int output = Utils::convertChoiceCharToIndex('z');
+    uint8_t output = Utils::convertChoiceCharToIndex('z');
     EXPECT_EQ(output, 25);
 }
 

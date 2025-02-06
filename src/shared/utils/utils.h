@@ -20,8 +20,8 @@ public:
                                 const std::vector<std::string>& validAnswers = {"y", "n"},
                                 bool caseSensitive = false);
     static std::vector<std::string> split(std::string str, char delimiter = '\n');
-    static char convertIndexToChoiceChar(int index);
-    static int convertChoiceCharToIndex(char ch);
+    static char convertIndexToChoiceChar(uint8_t index);
+    static uint8_t convertChoiceCharToIndex(char ch);
 
     template <typename F, typename... Args>
     static auto invokeAndCaptureOutput(F&& func, std::string input, Args&&... args) {
