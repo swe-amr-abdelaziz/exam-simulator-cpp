@@ -78,6 +78,34 @@ uint8_t Utils::convertChoiceCharToIndex(char ch) {
     return static_cast<uint8_t>(index < 0 ? 0 : index);
 }
 
+std::vector<unsigned short> Utils::generateIndices(const unsigned short& size, const bool& shuffle) {
+    if (size == 0) {
+        throw std::invalid_argument("Size must be greater than zero");
+    }
+    auto indices = std::vector<unsigned short>(size);
+    auto originalIndices = std::vector<unsigned short>(shuffle ? size : 0);
+    for (unsigned short i = 0; i < size; ++i) {
+        indices[i] = i;
+        if (shuffle) {
+            originalIndices[i] = i;
+        }
+    }
+    // If size == 1, then we don't need to shuffle
+    if (shuffle && size > 1) {
+        while (true) {
+            std::random_device randomDevice;
+            std::mt19937 generator(randomDevice());
+            std::shuffle(indices.begin(), indices.end(), generator);
+            for (unsigned short i = 0; i < size; ++i) {
+                if (indices[i] != originalIndices[i]) {
+                    return indices;
+                }
+            }
+        }
+    }
+    return indices;
+}
+
 std::string Utils::printAnswersArray(const std::vector<std::string>& validAnswers) {
     std::ostringstream oss;
     oss << "[";
