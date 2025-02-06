@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include "../enums/enums.h"
+#include "utils.template.cpp"
 #include <algorithm>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -25,32 +26,13 @@ public:
 
     template <typename F, typename... Args>
     static auto invokeAndCaptureOutput(F&& func, std::string input, Args&&... args) {
-        // Detect the return type of the function
-        using Ret = std::invoke_result_t<F, Args...>;
-        Ret funcOutput;
+        return ::invokeAndCaptureOutput(std::forward<F>(func), input, std::forward<Args>(args)...);
+    }
 
-        // Simulate the user input
-        std::istringstream inputBuffer(input);
-        std::streambuf* cinBuffer = std::cin.rdbuf(inputBuffer.rdbuf());
-
-        // Start capturing the console output
-        testing::internal::CaptureStdout();
-
-        if constexpr (std::is_void_v<Ret>) {
-            std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
-        } else {
-            funcOutput = std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
-        }
-
-        // Stop capturing the console output
-        std::cin.rdbuf(cinBuffer);
-        std::string consoleOutput = testing::internal::GetCapturedStdout();
-
-        // Return the function and console outputs
-        if constexpr (std::is_void_v<Ret>) {
-            return std::make_tuple(nullptr, consoleOutput);
-        }
-        return std::make_tuple(funcOutput, consoleOutput);
+    template <typename Obj, typename Ret, typename... Args>
+    static auto invokeAndCaptureOutput(Ret (Obj::*memFunc)(Args...), std::string input, Obj* obj,
+                                       Args... args) {
+        return ::invokeAndCaptureOutput(memFunc, input, obj, std::forward<Args>(args)...);
     }
 
 private:
