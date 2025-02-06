@@ -29,10 +29,35 @@ void MultipleChoiceQuestion::printWithCorrection(const unsigned short& index) {
 void MultipleChoiceQuestion::shuffleAnswers() {}
 
 std::tuple<std::string, std::vector<std::string>>
-    MultipleChoiceQuestion::getQuestionTextWithValidAnswers(const unsigned short& index) {
-    this->studentAnswer->setDegree((double) index);
-    std::vector<std::string> validAnswers;
-    return std::make_tuple("", validAnswers);
+    MultipleChoiceQuestion::getQuestionTextWithValidAnswers(const unsigned short& index, bool withCorrection) {
+    std::vector<std::string> vaildAnswers(this->choices.size());
+    std::ostringstream oss;
+
+    int questionNumber = index + 1;
+    oss << questionNumber << ". " << this->text << '\n';
+    for (size_t i = 0; i < this->choices.size(); ++i) {
+        char letter = Utils::convertIndexToChoiceChar(static_cast<uint8_t>(i));
+        vaildAnswers[i] = static_cast<char>(std::toupper(letter));
+        size_t indentWidth = std::to_string(questionNumber).length() + 2;
+        if (i > 0) {
+            oss << '\n';
+        }
+        oss << std::string(indentWidth, ' ') << letter << ". " << choices[i];
+
+        if (withCorrection) {
+            if (static_cast<int>(i) == this->correctAnswer->getText().value()) {
+                oss << "  ✅";
+            }
+            if (static_cast<int>(i) == this->studentAnswer->getText().value()) {
+                oss << "  ❌";
+            }
+        }
+    }
+
+    if (withCorrection) {
+        oss << "\n\nPress enter to continue";
+    }
+    return std::make_tuple(oss.str(), vaildAnswers);
 }
 
 void MultipleChoiceQuestion::calculateStudentDegree() {

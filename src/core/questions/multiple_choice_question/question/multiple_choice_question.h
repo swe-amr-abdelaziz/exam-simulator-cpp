@@ -20,7 +20,7 @@ public:
 private:
     std::vector<std::string> choices;
     std::tuple<std::string, std::vector<std::string>>
-        getQuestionTextWithValidAnswers(const unsigned short& index);
+        getQuestionTextWithValidAnswers(const unsigned short& index, bool withCorrection = false);
     void calculateStudentDegree() override;
 };
 
