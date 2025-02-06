@@ -17,9 +17,10 @@ bool MultipleChoiceQuestion::isCorrect() {
     return this->studentAnswer->getDegree().value() == this->correctAnswer->getDegree().value();
 }
 
-std::string MultipleChoiceQuestion::ask(const unsigned short& index) {
-    this->studentAnswer->setDegree((double) index);
-    return this->text;
+void MultipleChoiceQuestion::ask(const unsigned short& index) {
+    auto [questionBody, validAnswers] = this->getQuestionTextWithValidAnswers(index);
+    auto answer = Utils::askQuestion(questionBody, validAnswers);
+    this->studentAnswer->setText(Utils::convertChoiceCharToIndex(answer[0]));
 }
 
 void MultipleChoiceQuestion::printWithCorrection(const unsigned short& index) {

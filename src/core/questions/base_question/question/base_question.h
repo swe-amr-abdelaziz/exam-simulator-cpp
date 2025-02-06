@@ -15,7 +15,7 @@ public:
           studentAnswer(std::move(studentAnswer)) {}
     virtual ~Question() {}
     virtual bool isCorrect() override = 0;
-    virtual std::string ask(const unsigned short& index) override = 0;
+    virtual void ask(const unsigned short& index) override = 0;
     virtual void printWithCorrection(const unsigned short& index) override = 0;
 
 protected:
