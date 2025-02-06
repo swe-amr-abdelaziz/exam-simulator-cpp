@@ -7,6 +7,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <iostream>
+#include <random>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -23,6 +24,8 @@ public:
     static std::vector<std::string> split(std::string str, char delimiter = '\n');
     static char convertIndexToChoiceChar(uint8_t index);
     static uint8_t convertChoiceCharToIndex(char ch);
+    static std::vector<unsigned short> generateIndices(const unsigned short& size,
+                                                       const bool& shuffle = false);
 
     template <typename F, typename... Args>
     static auto invokeAndCaptureOutput(F&& func, std::string input, Args&&... args) {
