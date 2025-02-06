@@ -233,7 +233,7 @@ TEST(ConvertIndexToCharTest, given_index_4_then_returns_E) {
     EXPECT_EQ(output, 'E');
 }
 
-TEST(ConvertIndexToCharTest, given_invalid_index_greater_than_25_then_throws_invalid_argument) {
+TEST(ConvertIndexToCharTest, given_invalid_index_greater_than_25_then_throws_invalid_argument_exception) {
     EXPECT_THROW(
         {
             try {
@@ -266,7 +266,8 @@ TEST(ConvertChoiceCharToIndexTest, given_z_then_returns_25) {
     EXPECT_EQ(output, 25);
 }
 
-TEST(ConvertChoiceCharToIndexTest, given_number_instead_of_alphabet_char_then_throws_invalid_argument) {
+TEST(ConvertChoiceCharToIndexTest,
+     given_number_instead_of_alphabet_char_then_throws_invalid_argument_exception) {
     EXPECT_THROW(
         {
             try {
@@ -281,7 +282,7 @@ TEST(ConvertChoiceCharToIndexTest, given_number_instead_of_alphabet_char_then_th
 }
 
 TEST(ConvertChoiceCharToIndexTest,
-     given_special_character_instead_of_alphabet_char_then_throws_invalid_argument) {
+     given_special_character_instead_of_alphabet_char_then_throws_invalid_argument_exception) {
     EXPECT_THROW(
         {
             try {
@@ -293,4 +294,40 @@ TEST(ConvertChoiceCharToIndexTest,
             }
         },
         std::exception);
+}
+
+TEST(GenerateIndicesTest, given_a_size_of_zero_then_throws_invalid_argument_exception) {
+    EXPECT_THROW(
+        {
+            try {
+                unsigned short size = 0;
+                Utils::generateIndices(size);
+            } catch (const std::exception& ex) {
+                EXPECT_STREQ("Size must be greater than zero", ex.what());
+                throw;
+            }
+        },
+        std::exception);
+}
+
+TEST(GenerateIndicesTest, given_a_size_of_five_and_without_shuffling_then_returns_a_vector_of_sorted_indices) {
+    std::vector<unsigned short> indices = Utils::generateIndices(5);
+    std::vector<unsigned short> expected = {0, 1, 2, 3, 4};
+    ASSERT_EQ(indices.size(), expected.size());
+    ASSERT_THAT(indices, testing::ElementsAreArray(expected));
+    EXPECT_EQ(indices, expected);
+}
+
+TEST(GenerateIndicesTest, given_a_size_of_one_and_with_shuffling_then_returns_the_same_indices) {
+    std::vector<unsigned short> indices = Utils::generateIndices(1, true);
+    ASSERT_EQ(indices.size(), 1);
+    ASSERT_THAT(indices, testing::ElementsAre(0));
+}
+
+TEST(GenerateIndicesTest, given_a_size_of_five_and_with_shuffling_then_returns_a_vector_of_shuffled_indices) {
+    std::vector<unsigned short> shuffledIndices = Utils::generateIndices(5, true);
+    std::vector<unsigned short> sortedIndices = {0, 1, 2, 3, 4};
+    ASSERT_EQ(shuffledIndices.size(), sortedIndices.size());
+    ASSERT_THAT(shuffledIndices, testing::UnorderedElementsAreArray(sortedIndices));
+    EXPECT_NE(shuffledIndices, sortedIndices);
 }
