@@ -198,3 +198,43 @@ Press enter to continue
     EXPECT_EQ(consoleOutput, expectedOutput);
     EXPECT_FALSE(question->isCorrect());
 }
+
+TEST(shuffleAnswersTest,
+     given_mcq_data_with_five_choices_with_shuffled_answers_then_evaluate_student_answer_correctness) {
+    std::vector<std::string> subChoices(&choices[0], &choices[5]);
+    std::unique_ptr<MultipleChoiceAnswer> correctAnswer =
+        std::make_unique<MultipleChoiceAnswer>(subChoices, correctAnswerIndex, correctAnswerDegree);
+    std::unique_ptr<MultipleChoiceAnswer> studentAnswer =
+        std::make_unique<MultipleChoiceAnswer>(subChoices);
+    std::unique_ptr<MultipleChoiceQuestion> question =
+        std::make_unique<MultipleChoiceQuestion>("What is the capital of Egypt?", std::move(correctAnswer),
+                                                 std::move(studentAnswer), subChoices);
+    question->shuffleAnswers();
+    uint8_t questionIndex = 0;
+    std::string studentAnswerText = "A";
+    auto [funcOutput, consoleOutput] =
+        Utils::invokeAndCaptureOutput(&IQuestion::ask, studentAnswerText, question.get(), questionIndex);
+
+    // Validate that the prompt includes the question heading and the unordered list of choices
+    ASSERT_THAT(consoleOutput, testing::HasSubstr("1. What is the capital of Egypt?"));
+    ASSERT_THAT(consoleOutput, testing::HasSubstr("Cairo"));
+    ASSERT_THAT(consoleOutput, testing::HasSubstr("Giza"));
+    ASSERT_THAT(consoleOutput, testing::HasSubstr("Alexandria"));
+    ASSERT_THAT(consoleOutput, testing::HasSubstr("Mansoura"));
+    ASSERT_THAT(consoleOutput, testing::HasSubstr("Luxor"));
+
+    // Evaluate the correctness of the student's answer
+    auto consoleOutputSplitted = Utils::split(consoleOutput, '\n');
+    auto step = 1; // because the question heading is not counted
+    auto it =
+        std::find_if(consoleOutputSplitted.begin() + step, consoleOutputSplitted.end(),
+                     [](const std::string& line) { return line.find("Cairo") != std::string::npos; });
+    auto correctAnswerIndex =
+        static_cast<uint8_t>(std::distance(consoleOutputSplitted.begin() + step, it));
+    auto studentAnswerIndex = Utils::convertChoiceCharToIndex(studentAnswerText[0]);
+    if (correctAnswerIndex == studentAnswerIndex) {
+        EXPECT_TRUE(question->isCorrect());
+    } else {
+        EXPECT_FALSE(question->isCorrect());
+    }
+}
