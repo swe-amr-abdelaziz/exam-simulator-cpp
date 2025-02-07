@@ -3,7 +3,7 @@
 
 #include "../../../../shared/enums/enums.h"
 #include "../answer/base_answer.h"
-#include "base_question_interface.h"
+#include "base_question.interface.h"
 #include <memory>
 
 template <class T>
