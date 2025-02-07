@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "../enums/enums.h"
+#include "../constants/enums.h"
 #include "utils.template.cpp"
 #include <algorithm>
 #include <gmock/gmock.h>
