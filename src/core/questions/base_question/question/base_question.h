@@ -2,8 +2,8 @@
 #define BASE_QUESTION_H
 
 #include "../../../../shared/constants/enums.h"
+#include "../../../../shared/interfaces/quesiton.interface.h"
 #include "../answer/base_answer.h"
-#include "base_question.interface.h"
 #include <memory>
 
 template <class T>
