@@ -2,8 +2,8 @@
 #define MULTIPLE_CHOICE_ANSWER_H
 
 #include "../../base_question/answer/base_answer.h"
-#include "gmock/gmock.h"
 #include <algorithm>
+#include <gmock/gmock.h>
 
 class MultipleChoiceAnswer : public Answer<uint8_t, double> {
 public:
