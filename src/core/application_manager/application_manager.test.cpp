@@ -3,7 +3,7 @@
 TEST(ApplicationManagerTest, given_invalid_run_mode_when_run_then_throw) {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wconversion"
-    auto invalidRunMode = static_cast<RunMode>(-1);
+    auto invalidRunMode = static_cast<Enums::RunMode>(-1);
 #pragma GCC diagnostic pop
 
     EXPECT_THROW(

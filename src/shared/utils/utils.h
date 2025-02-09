@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+using namespace Enums;
 
 class Utils {
 public:

@@ -9,7 +9,7 @@
 template <class T>
 class Question : public IQuestion {
 public:
-    Question(std::string text, QuestionType type, std::unique_ptr<T> correctAnswer,
+    Question(std::string text, Enums::QuestionType type, std::unique_ptr<T> correctAnswer,
              std::unique_ptr<T> studentAnswer = nullptr)
         : text(text), type(type), correctAnswer(std::move(correctAnswer)),
           studentAnswer(std::move(studentAnswer)) {}
@@ -20,7 +20,7 @@ public:
 
 protected:
     std::string text;
-    QuestionType type;
+    Enums::QuestionType type;
     std::unique_ptr<T> correctAnswer;
     std::unique_ptr<T> studentAnswer;
     virtual void calculateStudentDegree() = 0;

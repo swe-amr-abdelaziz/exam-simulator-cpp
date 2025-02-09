@@ -4,7 +4,7 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(std::string text,
                                                std::unique_ptr<MultipleChoiceAnswer> correctAnswer,
                                                std::unique_ptr<MultipleChoiceAnswer> studentAnswer,
                                                std::vector<std::string> choices)
-    : Question<MultipleChoiceAnswer>(text, QuestionType::MCQ, std::move(correctAnswer),
+    : Question<MultipleChoiceAnswer>(text, Enums::QuestionType::MCQ, std::move(correctAnswer),
                                      std::move(studentAnswer)),
       choices(std::move(choices)) {}
 

@@ -9,12 +9,12 @@
 
 class ApplicationManager {
 public:
-    ApplicationManager(RunMode runMode);
+    ApplicationManager(Enums::RunMode runMode);
     ~ApplicationManager();
     int run();
 
 private:
-    RunMode runMode;
+    Enums::RunMode runMode;
     int runApp();
     int runTests();
     int generateQuestions();
