@@ -27,6 +27,12 @@ const std::vector<std::string> BOOL_QUESTION_VALID_ANSWERS = {"y", "n"};
 
 const std::string WHITESPACES = " \t\n\r\f\v";
 
+const int MAX_STRING_LENGTH = 500;
+
+const int MIN_CHOICES = 3;
+
+const int MAX_CHOICES = 5;
+
 } // namespace Enums
 
 #endif // ENUMS_H
