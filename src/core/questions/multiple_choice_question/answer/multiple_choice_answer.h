@@ -2,24 +2,17 @@
 #define MULTIPLE_CHOICE_ANSWER_H
 
 #include "../../base_question/answer/base_answer.h"
-#include <algorithm>
-#include <gmock/gmock.h>
+#include "validator/multiple_choice_answer.validator.h"
 
 class MultipleChoiceAnswer : public Answer<uint8_t, double> {
 public:
-    MultipleChoiceAnswer(const std::vector<std::string>& choices, std::optional<uint8_t> text = std::nullopt,
+    MultipleChoiceAnswer(std::optional<uint8_t> text = std::nullopt,
                          std::optional<double> degree = std::nullopt);
-    ~MultipleChoiceAnswer();
-    void setText(uint8_t text);
-    std::optional<uint8_t> getText();
-    void setDegree(double degree);
-    std::optional<double> getDegree();
-    void setChoices(std::vector<std::string> choices);
-    std::vector<std::string> getChoices();
-
-private:
-    std::vector<std::string> choices;
-    static std::vector<std::string> validateChoices(const std::vector<std::string>& choices);
+    ~MultipleChoiceAnswer() = default;
+    void setText(const uint8_t& text) override;
+    std::optional<uint8_t> getText() override;
+    void setDegree(const double& degree) override;
+    std::optional<double> getDegree() override;
 };
 
 #endif // MULTIPLE_CHOICE_ANSWER_H
