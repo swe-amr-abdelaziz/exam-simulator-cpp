@@ -7,9 +7,9 @@ template <class T, class U>
 class Answer {
 public:
     virtual ~Answer() = default;
-    virtual void setText(T text) = 0;
+    virtual void setText(const T& text) = 0;
     virtual std::optional<T> getText() = 0;
-    virtual void setDegree(U degree) = 0;
+    virtual void setDegree(const U& degree) = 0;
     virtual std::optional<U> getDegree() = 0;
 
 protected:
