@@ -6,13 +6,13 @@ using namespace TestDefaults;
 TEST(DefaultBuilderTest, given_multiple_choice_answer_builder_with_default_values) {
     auto answer = MultipleChoiceAnswerBuilder::create().build();
 
-    ASSERT_THAT(answer->getChoices(), testing::ElementsAreArray(choices));
+    ASSERT_THAT(answer->getChoices(), testing::ElementsAreArray(CHOICES));
     EXPECT_FALSE(answer->getText().has_value());
     EXPECT_FALSE(answer->getDegree().has_value());
 }
 
 TEST(SetChoicesTest, given_multiple_choice_answer_builder_with_choices) {
-    std::vector<std::string> subChoices(&choices[0], &choices[3]);
+    std::vector<std::string> subChoices(&CHOICES[0], &CHOICES[3]);
     auto answer = MultipleChoiceAnswerBuilder::create().setChoices(subChoices).build();
 
     ASSERT_THAT(answer->getChoices(), testing::ElementsAreArray(subChoices));
@@ -40,9 +40,9 @@ TEST(ResetTest, given_multiple_choice_answer_builder_with_custom_values) {
     uint8_t text = 1;
     double degree = 0.5;
     auto answer =
-        MultipleChoiceAnswerBuilder::create().setChoices(choices).setText(text).setDegree(degree).build();
+        MultipleChoiceAnswerBuilder::create().setChoices(CHOICES).setText(text).setDegree(degree).build();
 
-    ASSERT_THAT(answer->getChoices(), testing::ElementsAreArray(choices));
+    ASSERT_THAT(answer->getChoices(), testing::ElementsAreArray(CHOICES));
     EXPECT_EQ(answer->getText(), text);
     EXPECT_EQ(answer->getDegree(), degree);
 }

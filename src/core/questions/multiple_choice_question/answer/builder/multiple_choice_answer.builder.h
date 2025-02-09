@@ -16,7 +16,7 @@ public:
 
 private:
     MultipleChoiceAnswerBuilder();
-    std::vector<std::string> defaultChoices = TestDefaults::choices;
+    std::vector<std::string> defaultChoices = TestDefaults::CHOICES;
     std::optional<uint8_t> defaultText = std::nullopt;
     std::optional<double> defaultDegree = std::nullopt;
     std::unique_ptr<MultipleChoiceAnswer> answer;
