@@ -2,6 +2,7 @@
 #define APPLICATION_MANAGER_H
 
 #include "../../shared/constants/enums.h"
+#include "../../shared/constants/messages.h"
 #include "../../shared/utils/utils.h"
 #include <gtest/gtest.h>
 #include <iostream>

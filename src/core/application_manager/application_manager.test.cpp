@@ -13,7 +13,7 @@ TEST(ApplicationManagerTest, given_invalid_run_mode_when_run_then_throw) {
                     std::make_unique<ApplicationManager>(invalidRunMode);
                 appManager->run();
             } catch (const std::exception& ex) {
-                EXPECT_STREQ("Invalid run mode", ex.what());
+                EXPECT_EQ(Messages::INVALID_RUN_MODE, ex.what());
                 throw;
             }
         },
