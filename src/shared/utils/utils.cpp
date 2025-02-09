@@ -13,13 +13,13 @@ RunMode Utils::getAppRunMode(const int& argc, char* argv[]) {
     return RunMode::NORMAL;
 }
 
-std::string Utils::askQuestion(const std::string& question,
-                               const std::vector<std::string>& validAnswers, bool caseSensitive) {
+std::string Utils::askQuestion(const std::string& question, const std::vector<std::string>& validAnswers,
+                               const bool& caseSensitive) {
     while (true) {
         std::cout << question << '\n';
         std::string answer;
         std::getline(std::cin, answer);
-        answer = formailzeAnswer(answer, caseSensitive);
+        answer = Utils::formailzeAnswer(answer, caseSensitive);
 
         if (validAnswers.empty()) {
             return answer;
@@ -35,7 +35,7 @@ std::string Utils::askQuestion(const std::string& question,
             formalizedAnswers.end()) {
             return answer;
         } else {
-            std::cout << "Invalid answer. Please choose from: " << printAnswersArray(validAnswers)
+            std::cout << Messages::INVALID_MCQ_ANSWER << Utils::printAnswersArray(validAnswers)
                       << " (case " << (caseSensitive ? "sensitive" : "insensitive") << ")" << std::endl
                       << std::endl;
         }
@@ -43,16 +43,16 @@ std::string Utils::askQuestion(const std::string& question,
 }
 
 bool Utils::askBoolQuestion(const std::string& question,
-                            const std::vector<std::string>& validAnswers, bool caseSensitive) {
+                            const std::vector<std::string>& validAnswers, const bool& caseSensitive) {
     std::string answer = Utils::askQuestion(question, validAnswers, caseSensitive);
     auto trueAnswer = validAnswers[0];
     if (!caseSensitive) {
-        trueAnswer = toLower(trueAnswer);
+        trueAnswer = Utils::toLower(trueAnswer);
     }
     return answer.compare(trueAnswer) == 0;
 }
 
-std::vector<std::string> Utils::split(std::string str, char delimiter) {
+std::vector<std::string> Utils::split(const std::string& str, const char& delimiter) {
     std::istringstream buffer(str);
     std::string substr;
     std::vector<std::string> vec = {};
@@ -61,18 +61,17 @@ std::vector<std::string> Utils::split(std::string str, char delimiter) {
     return vec;
 }
 
-char Utils::convertIndexToChoiceChar(uint8_t index) {
-    if (index > 25) {
-        throw std::invalid_argument("Invalid index, must be between 0 and 25");
+char Utils::convertIndexToChoiceChar(const uint8_t& index) {
+    if (index > Utils::convertChoiceCharToIndex('Z')) {
+        throw std::invalid_argument(Messages::INVALID_CHAR_INDEX);
     }
     return static_cast<char>(static_cast<uint8_t>('A') + index);
 }
 
-uint8_t Utils::convertChoiceCharToIndex(char ch) {
+uint8_t Utils::convertChoiceCharToIndex(const char& ch) {
     auto charCode = std::toupper(ch);
     if (!(charCode >= 'A' && charCode <= 'Z')) {
-        throw std::invalid_argument(
-            "Invalid choice character, must be between A and Z (case insensitive)");
+        throw std::invalid_argument(Messages::INVALID_CHOICE_CHAR);
     }
     int index = charCode - 'A';
     return static_cast<uint8_t>(index < 0 ? 0 : index);
@@ -80,7 +79,7 @@ uint8_t Utils::convertChoiceCharToIndex(char ch) {
 
 std::vector<unsigned short> Utils::generateIndices(const unsigned short& size, const bool& shuffle) {
     if (size == 0) {
-        throw std::invalid_argument("Size must be greater than zero");
+        throw std::invalid_argument(Messages::SIZE_GT_ZERO);
     }
     auto indices = std::vector<unsigned short>(size);
     auto originalIndices = std::vector<unsigned short>(shuffle ? size : 0);
@@ -123,17 +122,16 @@ std::string Utils::toLower(const std::string& str) {
 }
 
 std::string Utils::trim(const std::string& str) {
-    const std::string whitespaces = " \t\n\r\f\v";
     std::string result = str;
-    result.erase(0, result.find_first_not_of(whitespaces));
-    result.erase(result.find_last_not_of(whitespaces) + 1);
+    result.erase(0, result.find_first_not_of(WHITESPACES));
+    result.erase(result.find_last_not_of(WHITESPACES) + 1);
     return result;
 }
 
 std::string Utils::formailzeAnswer(const std::string& answer, const bool& caseSensitive) {
-    std::string formalizedAnswer = trim(answer);
+    std::string formalizedAnswer = Utils::trim(answer);
     if (!caseSensitive) {
-        formalizedAnswer = toLower(formalizedAnswer);
+        formalizedAnswer = Utils::toLower(formalizedAnswer);
     }
     return formalizedAnswer;
 }

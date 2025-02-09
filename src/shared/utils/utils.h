@@ -2,6 +2,8 @@
 #define UTILS_H
 
 #include "../constants/enums.h"
+#include "../constants/messages.h"
+#include "../constants/test_defaults.h"
 #include "utils.template.cpp"
 #include <algorithm>
 #include <gmock/gmock.h>
@@ -12,19 +14,20 @@
 #include <string>
 #include <vector>
 using namespace Enums;
+using namespace TestDefaults;
 
 class Utils {
 public:
     static RunMode getAppRunMode(const int& argc, char* argv[]);
     static std::string askQuestion(const std::string& question,
                                    const std::vector<std::string>& validAnswers = {},
-                                   bool caseSensitive = false);
+                                   const bool& caseSensitive = false);
     static bool askBoolQuestion(const std::string& question,
-                                const std::vector<std::string>& validAnswers = {"y", "n"},
-                                bool caseSensitive = false);
-    static std::vector<std::string> split(std::string str, char delimiter = '\n');
-    static char convertIndexToChoiceChar(uint8_t index);
-    static uint8_t convertChoiceCharToIndex(char ch);
+                                const std::vector<std::string>& validAnswers = BOOL_QUESTION_VALID_ANSWERS,
+                                const bool& caseSensitive = false);
+    static std::vector<std::string> split(const std::string& str, const char& delimiter = '\n');
+    static char convertIndexToChoiceChar(const uint8_t& index);
+    static uint8_t convertChoiceCharToIndex(const char& ch);
     static std::vector<unsigned short> generateIndices(const unsigned short& size,
                                                        const bool& shuffle = false);
 
