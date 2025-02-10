@@ -25,3 +25,7 @@ void MultipleChoiceAnswer::setDegree(const double& degree) {
 std::optional<double> MultipleChoiceAnswer::getDegree() {
     return this->degree;
 }
+
+std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceAnswer::clone() const {
+    return std::make_unique<MultipleChoiceAnswer>(this->text, this->degree);
+}

@@ -46,3 +46,21 @@ TEST(SetDegreeTest, given_multiple_choice_answer_with_valid_degree_then_degree_i
     EXPECT_TRUE(answer->getDegree().has_value());
     EXPECT_EQ(answer->getDegree(), degree2);
 }
+
+TEST(CloneTest,
+     given_multiple_choice_answer_with_valid_text_and_degree_then_clone_is_created_and_values_are_copied) {
+    uint8_t textOrigin = 1;
+    double degreeOrigin = 5.0;
+    auto origin = std::make_unique<MultipleChoiceAnswer>(textOrigin, degreeOrigin);
+    auto clone = origin->clone();
+
+    uint8_t textClone = 2;
+    double degreeClone = 8.0;
+    clone->setText(textClone);
+    clone->setDegree(degreeClone);
+
+    EXPECT_EQ(origin->getText(), textOrigin);
+    EXPECT_EQ(clone->getText(), textClone);
+    EXPECT_EQ(origin->getDegree(), degreeOrigin);
+    EXPECT_EQ(clone->getDegree(), degreeClone);
+}
