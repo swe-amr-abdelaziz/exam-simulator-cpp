@@ -4,11 +4,11 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(std::string text,
                                                std::unique_ptr<MultipleChoiceAnswer> correctAnswer,
                                                std::unique_ptr<MultipleChoiceAnswer> studentAnswer,
                                                std::vector<std::string> choices)
-    : Question<MultipleChoiceAnswer>(text, Enums::QuestionType::MCQ, std::move(correctAnswer),
-                                     std::move(studentAnswer)),
-      choices(std::move(choices)) {}
-
-MultipleChoiceQuestion::~MultipleChoiceQuestion() {}
+    : Question<MultipleChoiceAnswer>(
+          MultipleChoiceQuestionValidator::validateText(text), Enums::QuestionType::MCQ,
+          MultipleChoiceQuestionValidator::validateCorrectAnswer(std::move(correctAnswer), choices),
+          MultipleChoiceQuestionValidator::validateStudentAnswer(std::move(studentAnswer), choices)),
+      choices(MultipleChoiceQuestionValidator::validateChoices(choices)) {}
 
 bool MultipleChoiceQuestion::isCorrect() {
     if (!this->studentAnswer->getDegree().has_value()) {
@@ -25,8 +25,7 @@ void MultipleChoiceQuestion::ask(const unsigned short& index) {
 
 void MultipleChoiceQuestion::printWithCorrection(const unsigned short& index) {
     if (this->isCorrect()) {
-        throw std::runtime_error(
-            "This method should not be called when the student answer is correct");
+        throw std::runtime_error(Messages::METHOD_CANNOT_BE_CALLED_WITH_CORRECT_ANSWER);
     }
     auto [questionBody, validAnswers] = this->getQuestionTextWithValidAnswers(index, true);
     auto answer = Utils::askQuestion(questionBody);
@@ -43,6 +42,46 @@ void MultipleChoiceQuestion::shuffleAnswers() {
             correctAnswerUpdated = true;
         }
     }
+}
+
+void MultipleChoiceQuestion::setText(const std::string& text) {
+    this->text = MultipleChoiceQuestionValidator::validateText(text);
+}
+
+std::string MultipleChoiceQuestion::getText() const {
+    return this->text;
+}
+
+void MultipleChoiceQuestion::setCorrectAnswer(std::unique_ptr<MultipleChoiceAnswer> correctAnswer) {
+    this->correctAnswer =
+        MultipleChoiceQuestionValidator::validateCorrectAnswer(std::move(correctAnswer), this->choices);
+}
+
+std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceQuestion::getCorrectAnswer() const {
+    return this->correctAnswer->clone();
+}
+
+void MultipleChoiceQuestion::setStudentAnswer(std::unique_ptr<MultipleChoiceAnswer> studentAnswer) {
+    this->studentAnswer =
+        MultipleChoiceQuestionValidator::validateStudentAnswer(std::move(studentAnswer), this->choices);
+}
+
+std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceQuestion::getStudentAnswer() const {
+    return this->studentAnswer->clone();
+}
+
+void MultipleChoiceQuestion::setChoices(const std::vector<std::string>& choices) {
+    this->choices = MultipleChoiceQuestionValidator::validateChoices(choices);
+}
+
+std::vector<std::string> MultipleChoiceQuestion::getChoices() const {
+    return this->choices;
+}
+
+std::unique_ptr<MultipleChoiceQuestion> MultipleChoiceQuestion::clone() const {
+    return std::make_unique<MultipleChoiceQuestion>(this->text, std::move(this->correctAnswer->clone()),
+                                                    std::move(this->studentAnswer->clone()),
+                                                    this->choices);
 }
 
 std::tuple<std::string, std::vector<std::string>>
@@ -63,23 +102,25 @@ std::tuple<std::string, std::vector<std::string>>
 
         if (withCorrection) {
             if (static_cast<int>(i) == this->correctAnswer->getText().value()) {
-                oss << "  ✅";
+                oss << "  " << Messages::CORRECT_ANSWER_EMOJI;
             }
             if (static_cast<int>(i) == this->studentAnswer->getText().value()) {
-                oss << "  ❌";
+                oss << "  " << Messages::WRONG_ANSWER_EMOJI;
             }
         }
     }
 
     if (withCorrection) {
-        oss << "\n\nPress enter to continue";
+        oss << "\n\n" << Messages::PRESS_ENTER_PROMPT;
     }
     return std::make_tuple(oss.str(), vaildAnswers);
 }
 
 void MultipleChoiceQuestion::calculateStudentDegree() {
-    double studentDegree = this->studentAnswer->getText().value() == this->correctAnswer->getText().value()
-                               ? this->correctAnswer->getDegree().value()
-                               : 0;
+    auto studentAnswer = this->studentAnswer->getText();
+    double studentDegree =
+        studentAnswer.has_value() && studentAnswer.value() == this->correctAnswer->getText().value()
+            ? this->correctAnswer->getDegree().value()
+            : 0;
     this->studentAnswer->setDegree(studentDegree);
 }
