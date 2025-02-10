@@ -14,8 +14,6 @@ public:
 
 private:
     MultipleChoiceAnswerBuilder();
-    std::optional<uint8_t> defaultText = std::nullopt;
-    std::optional<double> defaultDegree = std::nullopt;
     std::unique_ptr<MultipleChoiceAnswer> answer;
     std::unique_ptr<MultipleChoiceAnswer> reset();
 };

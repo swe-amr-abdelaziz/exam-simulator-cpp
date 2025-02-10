@@ -21,5 +21,5 @@ std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceAnswerBuilder::build() {
 }
 
 std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceAnswerBuilder::reset() {
-    return std::make_unique<MultipleChoiceAnswer>(this->defaultText, this->defaultDegree);
+    return std::make_unique<MultipleChoiceAnswer>(std::nullopt, std::nullopt);
 }
