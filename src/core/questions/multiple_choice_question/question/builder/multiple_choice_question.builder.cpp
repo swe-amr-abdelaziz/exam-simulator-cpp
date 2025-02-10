@@ -34,7 +34,10 @@ std::unique_ptr<MultipleChoiceQuestion> MultipleChoiceQuestionBuilder::build() {
 }
 
 std::unique_ptr<MultipleChoiceQuestion> MultipleChoiceQuestionBuilder::reset() {
-    auto correctAnswer = MultipleChoiceAnswerBuilder::create().build();
+    auto correctAnswer = MultipleChoiceAnswerBuilder::create()
+                             .setText(TestDefaults::MCQ_CORRECT_ANSWER_TEXT)
+                             .setDegree(TestDefaults::MCQ_CORRECT_ANSWER_DEGREE)
+                             .build();
     auto studentAnswer = MultipleChoiceAnswerBuilder::create().build();
     return std::make_unique<MultipleChoiceQuestion>(TestDefaults::MCQ_TEXT, std::move(correctAnswer),
                                                     std::move(studentAnswer), TestDefaults::CHOICES);

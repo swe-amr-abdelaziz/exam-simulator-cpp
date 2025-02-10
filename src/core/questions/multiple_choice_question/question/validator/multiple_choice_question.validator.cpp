@@ -12,7 +12,13 @@ std::string MultipleChoiceQuestionValidator::validateText(const std::string& tex
 
 std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceQuestionValidator::validateCorrectAnswer(
     std::unique_ptr<MultipleChoiceAnswer> correctAnswer, const std::vector<std::string>& choices) {
-    if (correctAnswer->getText().has_value() && correctAnswer->getText().value() >= choices.size()) {
+    if (!correctAnswer->getText().has_value()) {
+        throw std::invalid_argument(Messages::REQUIRED_MCQ_CORRECT_ANSWER_TEXT);
+    }
+    if (!correctAnswer->getDegree().has_value()) {
+        throw std::invalid_argument(Messages::REQUIRED_MCQ_CORRECT_ANSWER_DEGREE);
+    }
+    if (correctAnswer->getText().value() >= choices.size()) {
         throw std::invalid_argument(Messages::INVALID_MCQ_ANSWER_VALUE);
     }
     return correctAnswer;

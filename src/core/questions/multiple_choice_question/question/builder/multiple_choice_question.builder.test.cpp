@@ -12,10 +12,16 @@ TEST(DefaultBuilderTest, given_multiple_choice_question_builder_with_default_val
     auto question = MultipleChoiceQuestionBuilder::create().build();
 
     EXPECT_EQ(question->getText(), TestDefaults::MCQ_TEXT);
-    EXPECT_FALSE(question->getCorrectAnswer()->getText().has_value());
-    EXPECT_FALSE(question->getCorrectAnswer()->getDegree().has_value());
+
+    EXPECT_TRUE(question->getCorrectAnswer()->getText().has_value());
+    EXPECT_EQ(question->getCorrectAnswer()->getText().value(), TestDefaults::MCQ_CORRECT_ANSWER_TEXT);
+
+    EXPECT_TRUE(question->getCorrectAnswer()->getDegree().has_value());
+    EXPECT_EQ(question->getCorrectAnswer()->getDegree().value(), TestDefaults::MCQ_CORRECT_ANSWER_DEGREE);
+
     EXPECT_FALSE(question->getStudentAnswer()->getText().has_value());
     EXPECT_FALSE(question->getStudentAnswer()->getDegree().has_value());
+
     EXPECT_EQ(question->getChoices(), TestDefaults::CHOICES);
 }
 

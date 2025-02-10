@@ -19,6 +19,10 @@ const std::string INVALID_RUN_MODE = "Invalid run mode";
 const std::string QUESTION_TEXT_CANNOT_BE_EMPTY = "The question text cannot be empty";
 const std::string QUESTION_TEXT_CANNOT_BE_VERY_LONG =
     "The question text cannot be longer than 500 characters";
+const std::string REQUIRED_MCQ_CORRECT_ANSWER_DEGREE =
+    "Correct answer degree is required for multiple choice questions";
+const std::string REQUIRED_MCQ_CORRECT_ANSWER_TEXT =
+    "Correct answer text is required for multiple choice questions";
 const std::string SIZE_GT_ZERO = "Size must be greater than zero";
 
 } // namespace Messages
