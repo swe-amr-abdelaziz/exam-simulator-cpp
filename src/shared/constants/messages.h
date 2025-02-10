@@ -14,7 +14,7 @@ const std::string INVALID_CHOICE_CHAR =
     "Invalid choice character, must be between A and Z (case insensitive)";
 const std::string INVALID_DEGREE = "Degree must be greater than or equal to zero";
 const std::string INVALID_MCQ_ANSWER = "Invalid answer. Please choose from: ";
-const std::string INVALID_MCQ_ANSWER_VALUE = "Answer text must be one of the provided choices";
+const std::string INVALID_MCQ_ANSWER_VALUE = "Answer value must be one of the provided choices";
 const std::string INVALID_MCQ_CHOICES_RANGE = "Choices must be between 3 and 5 elements";
 const std::string INVALID_RUN_MODE = "Invalid run mode";
 const std::string METHOD_CANNOT_BE_CALLED_WITH_CORRECT_ANSWER =
@@ -25,8 +25,8 @@ const std::string QUESTION_TEXT_CANNOT_BE_VERY_LONG =
     "The question text cannot be longer than 500 characters";
 const std::string REQUIRED_MCQ_CORRECT_ANSWER_DEGREE =
     "Correct answer degree is required for multiple choice questions";
-const std::string REQUIRED_MCQ_CORRECT_ANSWER_TEXT =
-    "Correct answer text is required for multiple choice questions";
+const std::string REQUIRED_MCQ_CORRECT_ANSWER_VALUE =
+    "Correct answer value is required for multiple choice questions";
 const std::string SIZE_GT_ZERO = "Size must be greater than zero";
 const std::string WRONG_ANSWER_EMOJI = "❌";
 

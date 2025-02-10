@@ -5,7 +5,7 @@
 
 class MultipleChoiceAnswerValidator {
 public:
-    static uint8_t validateText(const uint8_t& text);
+    static uint8_t validateValue(const uint8_t& value);
     static double validateDergree(const double& degree);
 };
 

@@ -1,21 +1,21 @@
 #include "multiple_choice_answer.h"
 
-MultipleChoiceAnswer::MultipleChoiceAnswer(std::optional<uint8_t> text, std::optional<double> degree)
+MultipleChoiceAnswer::MultipleChoiceAnswer(std::optional<uint8_t> value, std::optional<double> degree)
     : Answer<uint8_t, double>() {
-    if (text.has_value()) {
-        this->setText(text.value());
+    if (value.has_value()) {
+        this->setValue(value.value());
     }
     if (degree.has_value()) {
         this->setDegree(degree.value());
     }
 }
 
-void MultipleChoiceAnswer::setText(const uint8_t& text) {
-    this->text = MultipleChoiceAnswerValidator::validateText(text);
+void MultipleChoiceAnswer::setValue(const uint8_t& value) {
+    this->value = MultipleChoiceAnswerValidator::validateValue(value);
 }
 
-std::optional<uint8_t> MultipleChoiceAnswer::getText() {
-    return this->text;
+std::optional<uint8_t> MultipleChoiceAnswer::getValue() {
+    return this->value;
 }
 
 void MultipleChoiceAnswer::setDegree(const double& degree) {
@@ -27,5 +27,5 @@ std::optional<double> MultipleChoiceAnswer::getDegree() {
 }
 
 std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceAnswer::clone() const {
-    return std::make_unique<MultipleChoiceAnswer>(this->text, this->degree);
+    return std::make_unique<MultipleChoiceAnswer>(this->value, this->degree);
 }

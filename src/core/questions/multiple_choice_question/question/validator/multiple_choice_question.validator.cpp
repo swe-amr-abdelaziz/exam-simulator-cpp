@@ -12,13 +12,13 @@ std::string MultipleChoiceQuestionValidator::validateText(const std::string& tex
 
 std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceQuestionValidator::validateCorrectAnswer(
     std::unique_ptr<MultipleChoiceAnswer> correctAnswer, const std::vector<std::string>& choices) {
-    if (!correctAnswer->getText().has_value()) {
-        throw std::invalid_argument(Messages::REQUIRED_MCQ_CORRECT_ANSWER_TEXT);
+    if (!correctAnswer->getValue().has_value()) {
+        throw std::invalid_argument(Messages::REQUIRED_MCQ_CORRECT_ANSWER_VALUE);
     }
     if (!correctAnswer->getDegree().has_value()) {
         throw std::invalid_argument(Messages::REQUIRED_MCQ_CORRECT_ANSWER_DEGREE);
     }
-    if (correctAnswer->getText().value() >= choices.size()) {
+    if (correctAnswer->getValue().value() >= choices.size()) {
         throw std::invalid_argument(Messages::INVALID_MCQ_ANSWER_VALUE);
     }
     return correctAnswer;
@@ -26,7 +26,7 @@ std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceQuestionValidator::validateC
 
 std::unique_ptr<MultipleChoiceAnswer> MultipleChoiceQuestionValidator::validateStudentAnswer(
     std::unique_ptr<MultipleChoiceAnswer> studentAnswer, const std::vector<std::string>& choices) {
-    if (studentAnswer->getText().has_value() && studentAnswer->getText().value() >= choices.size()) {
+    if (studentAnswer->getValue().has_value() && studentAnswer->getValue().value() >= choices.size()) {
         throw std::invalid_argument(Messages::INVALID_MCQ_ANSWER_VALUE);
     }
     return studentAnswer;

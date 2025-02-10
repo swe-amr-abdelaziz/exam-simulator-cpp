@@ -43,7 +43,7 @@ TEST(ValidateCorrectAnswerTest, should_throw_exception_when_correct_answer_text_
                 MultipleChoiceQuestionValidator::validateCorrectAnswer(std::move(correctAnswer),
                                                                        TestDefaults::CHOICES);
             } catch (const std::exception& ex) {
-                EXPECT_EQ(Messages::REQUIRED_MCQ_CORRECT_ANSWER_TEXT, ex.what());
+                EXPECT_EQ(Messages::REQUIRED_MCQ_CORRECT_ANSWER_VALUE, ex.what());
                 throw;
             }
         },
@@ -55,7 +55,7 @@ TEST(ValidateCorrectAnswerTest, should_throw_exception_when_correct_answer_degre
         {
             try {
                 auto correctAnswer = MultipleChoiceAnswerBuilder::create()
-                                         .setText(TestDefaults::MCQ_CORRECT_ANSWER_TEXT)
+                                         .setValue(TestDefaults::MCQ_CORRECT_ANSWER_VALUE)
                                          .build();
                 MultipleChoiceQuestionValidator::validateCorrectAnswer(std::move(correctAnswer),
                                                                        TestDefaults::CHOICES);
@@ -73,7 +73,7 @@ TEST(ValidateCorrectAnswerTest,
         {
             try {
                 auto correctAnswer = MultipleChoiceAnswerBuilder::create()
-                                         .setText(static_cast<uint8_t>(TestDefaults::CHOICES.size()))
+                                         .setValue(static_cast<uint8_t>(TestDefaults::CHOICES.size()))
                                          .setDegree(TestDefaults::MCQ_CORRECT_ANSWER_DEGREE)
                                          .build();
                 MultipleChoiceQuestionValidator::validateCorrectAnswer(std::move(correctAnswer),
@@ -88,12 +88,12 @@ TEST(ValidateCorrectAnswerTest,
 
 TEST(ValidateCorrectAnswerTest, should_return_correct_answer_when_correct_answer_value_is_valid) {
     auto correctAnswer = MultipleChoiceAnswerBuilder::create()
-                             .setText(TestDefaults::MCQ_CORRECT_ANSWER_TEXT)
+                             .setValue(TestDefaults::MCQ_CORRECT_ANSWER_VALUE)
                              .setDegree(TestDefaults::MCQ_CORRECT_ANSWER_DEGREE)
                              .build();
     auto output = MultipleChoiceQuestionValidator::validateCorrectAnswer(std::move(correctAnswer),
                                                                          TestDefaults::CHOICES);
-    EXPECT_EQ(output->getText().value(), TestDefaults::MCQ_CORRECT_ANSWER_TEXT);
+    EXPECT_EQ(output->getValue().value(), TestDefaults::MCQ_CORRECT_ANSWER_VALUE);
 }
 
 TEST(ValidateStudentAnswerTest,
@@ -102,7 +102,7 @@ TEST(ValidateStudentAnswerTest,
         {
             try {
                 auto studentAnswer = MultipleChoiceAnswerBuilder::create()
-                                         .setText(static_cast<uint8_t>(TestDefaults::CHOICES.size()))
+                                         .setValue(static_cast<uint8_t>(TestDefaults::CHOICES.size()))
                                          .build();
                 MultipleChoiceQuestionValidator::validateStudentAnswer(std::move(studentAnswer),
                                                                        TestDefaults::CHOICES);
@@ -115,11 +115,11 @@ TEST(ValidateStudentAnswerTest,
 }
 
 TEST(ValidateStudentAnswerTest, should_return_student_answer_when_student_answer_value_is_valid) {
-    uint8_t text = 0;
-    auto studentAnswer = MultipleChoiceAnswerBuilder::create().setText(text).build();
+    uint8_t value = 0;
+    auto studentAnswer = MultipleChoiceAnswerBuilder::create().setValue(value).build();
     auto output = MultipleChoiceQuestionValidator::validateStudentAnswer(std::move(studentAnswer),
                                                                          TestDefaults::CHOICES);
-    EXPECT_EQ(output->getText().value(), text);
+    EXPECT_EQ(output->getValue().value(), value);
 }
 
 TEST(ValidateChoicesTest, should_throw_exception_when_choices_are_less_than_3) {

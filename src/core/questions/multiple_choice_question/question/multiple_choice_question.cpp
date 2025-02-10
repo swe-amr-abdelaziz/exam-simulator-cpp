@@ -20,7 +20,7 @@ bool MultipleChoiceQuestion::isCorrect() {
 void MultipleChoiceQuestion::ask(const unsigned short& index) {
     auto [questionBody, validAnswers] = this->getQuestionTextWithValidAnswers(index);
     auto answer = Utils::askQuestion(questionBody, validAnswers);
-    this->studentAnswer->setText(Utils::convertChoiceCharToIndex(answer[0]));
+    this->studentAnswer->setValue(Utils::convertChoiceCharToIndex(answer[0]));
 }
 
 void MultipleChoiceQuestion::printWithCorrection(const unsigned short& index) {
@@ -37,8 +37,8 @@ void MultipleChoiceQuestion::shuffleAnswers() {
     bool correctAnswerUpdated = false;
     for (size_t i = 0; i < this->choices.size(); ++i) {
         this->choices[i] = originalChoices[indexArray[i]];
-        if (!correctAnswerUpdated && this->correctAnswer->getText().value() == indexArray[i]) {
-            this->correctAnswer->setText(static_cast<uint8_t>(i));
+        if (!correctAnswerUpdated && this->correctAnswer->getValue().value() == indexArray[i]) {
+            this->correctAnswer->setValue(static_cast<uint8_t>(i));
             correctAnswerUpdated = true;
         }
     }
@@ -101,10 +101,10 @@ std::tuple<std::string, std::vector<std::string>>
         oss << std::string(indentWidth, ' ') << letter << ". " << choices[i];
 
         if (withCorrection) {
-            if (static_cast<int>(i) == this->correctAnswer->getText().value()) {
+            if (static_cast<int>(i) == this->correctAnswer->getValue().value()) {
                 oss << "  " << Messages::CORRECT_ANSWER_EMOJI;
             }
-            if (static_cast<int>(i) == this->studentAnswer->getText().value()) {
+            if (static_cast<int>(i) == this->studentAnswer->getValue().value()) {
                 oss << "  " << Messages::WRONG_ANSWER_EMOJI;
             }
         }
@@ -117,9 +117,9 @@ std::tuple<std::string, std::vector<std::string>>
 }
 
 void MultipleChoiceQuestion::calculateStudentDegree() {
-    auto studentAnswer = this->studentAnswer->getText();
+    auto studentAnswer = this->studentAnswer->getValue();
     double studentDegree =
-        studentAnswer.has_value() && studentAnswer.value() == this->correctAnswer->getText().value()
+        studentAnswer.has_value() && studentAnswer.value() == this->correctAnswer->getValue().value()
             ? this->correctAnswer->getDegree().value()
             : 0;
     this->studentAnswer->setDegree(studentDegree);

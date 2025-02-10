@@ -14,7 +14,7 @@ const std::string BOOL_QUESTION_1 = "Are you a software engineer?";
 const std::vector<std::string> BOOL_QUESTION_VALID_ANSWERS_WORDS = {"yes", "no"};
 const std::string MCQ_TEXT = "What is the name of the first month of the year?";
 const std::vector<std::string> CHOICES = {"January", "February", "March", "April", "May"};
-const uint8_t MCQ_CORRECT_ANSWER_TEXT = 0;
+const uint8_t MCQ_CORRECT_ANSWER_VALUE = 0;
 const double MCQ_CORRECT_ANSWER_DEGREE = 1.0;
 
 } // namespace TestDefaults

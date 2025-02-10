@@ -8,7 +8,7 @@ class MultipleChoiceAnswerBuilder : public IBuilder<std::unique_ptr<MultipleChoi
 public:
     static MultipleChoiceAnswerBuilder create();
     ~MultipleChoiceAnswerBuilder() override = default;
-    MultipleChoiceAnswerBuilder& setText(const uint8_t& text);
+    MultipleChoiceAnswerBuilder& setValue(const uint8_t& value);
     MultipleChoiceAnswerBuilder& setDegree(const double& degree);
     std::unique_ptr<MultipleChoiceAnswer> build() override;
 

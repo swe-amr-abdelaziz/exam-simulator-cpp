@@ -1,12 +1,12 @@
 #include "multiple_choice_answer.validator.h"
 
-TEST(ValidateTextTest, should_throw_exception_when_text_index_is_greater_than_25) {
+TEST(ValidateValueTest, should_throw_exception_when_value_index_is_greater_than_25) {
     EXPECT_THROW(
         {
             try {
-                uint8_t text = Utils::convertChoiceCharToIndex('Z');
-                text++;
-                MultipleChoiceAnswerValidator::validateText(text);
+                uint8_t value = Utils::convertChoiceCharToIndex('Z');
+                value++;
+                MultipleChoiceAnswerValidator::validateValue(value);
             } catch (const std::exception& ex) {
                 EXPECT_EQ(Messages::INVALID_CHAR_INDEX, ex.what());
                 throw;
@@ -15,10 +15,10 @@ TEST(ValidateTextTest, should_throw_exception_when_text_index_is_greater_than_25
         std::exception);
 }
 
-TEST(ValidateTextTest, should_return_text_when_text_index_is_in_choices) {
-    uint8_t text = static_cast<uint8_t>(TestDefaults::CHOICES.size() - 1);
-    auto output = MultipleChoiceAnswerValidator::validateText(text);
-    EXPECT_EQ(output, text);
+TEST(ValidateValueTest, should_return_value_when_value_index_is_in_choices) {
+    uint8_t value = static_cast<uint8_t>(TestDefaults::CHOICES.size() - 1);
+    auto output = MultipleChoiceAnswerValidator::validateValue(value);
+    EXPECT_EQ(output, value);
 }
 
 TEST(ValidateDegreeTest, should_throw_exception_when_degree_is_less_than_zero) {

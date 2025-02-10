@@ -1,10 +1,10 @@
 #include "multiple_choice_answer.validator.h"
 
-uint8_t MultipleChoiceAnswerValidator::validateText(const uint8_t& text) {
-    if (text > Utils::convertChoiceCharToIndex('Z')) {
+uint8_t MultipleChoiceAnswerValidator::validateValue(const uint8_t& value) {
+    if (value > Utils::convertChoiceCharToIndex('Z')) {
         throw std::invalid_argument(Messages::INVALID_CHAR_INDEX);
     }
-    return text;
+    return value;
 }
 
 double MultipleChoiceAnswerValidator::validateDergree(const double& degree) {

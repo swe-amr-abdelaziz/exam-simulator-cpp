@@ -35,7 +35,7 @@ std::unique_ptr<MultipleChoiceQuestion> MultipleChoiceQuestionBuilder::build() {
 
 std::unique_ptr<MultipleChoiceQuestion> MultipleChoiceQuestionBuilder::reset() {
     auto correctAnswer = MultipleChoiceAnswerBuilder::create()
-                             .setText(TestDefaults::MCQ_CORRECT_ANSWER_TEXT)
+                             .setValue(TestDefaults::MCQ_CORRECT_ANSWER_VALUE)
                              .setDegree(TestDefaults::MCQ_CORRECT_ANSWER_DEGREE)
                              .build();
     auto studentAnswer = MultipleChoiceAnswerBuilder::create().build();

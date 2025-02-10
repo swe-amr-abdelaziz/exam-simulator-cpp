@@ -6,8 +6,8 @@ MultipleChoiceAnswerBuilder MultipleChoiceAnswerBuilder::create() {
 
 MultipleChoiceAnswerBuilder::MultipleChoiceAnswerBuilder() : answer(this->reset()) {}
 
-MultipleChoiceAnswerBuilder& MultipleChoiceAnswerBuilder::setText(const uint8_t& text) {
-    this->answer->setText(text);
+MultipleChoiceAnswerBuilder& MultipleChoiceAnswerBuilder::setValue(const uint8_t& value) {
+    this->answer->setValue(value);
     return *this;
 }
 
