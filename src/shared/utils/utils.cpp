@@ -27,8 +27,8 @@ std::string Utils::askQuestion(const std::string& question, const std::vector<st
 
         std::vector<std::string> formalizedAnswers = validAnswers;
         std::transform(formalizedAnswers.begin(), formalizedAnswers.end(),
-                       formalizedAnswers.begin(), [caseSensitive](const std::string& answer) {
-                           return Utils::formailzeAnswer(answer, caseSensitive);
+                       formalizedAnswers.begin(), [caseSensitive](const std::string& ans) {
+                           return Utils::formailzeAnswer(ans, caseSensitive);
                        });
 
         if (std::find(formalizedAnswers.begin(), formalizedAnswers.end(), answer) !=
