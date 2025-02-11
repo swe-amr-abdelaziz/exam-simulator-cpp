@@ -21,6 +21,7 @@ It follows **object-oriented principles**, applies **design patterns**, and leve
 - **Lambda Expressions**: Used for cleaner, more concise code in various places.
 
 ### 🔍 **Code Quality & Static Analysis**
+- **Compiler Warnings**: Uses robust configuration for maximum warning levels and strict standard conformance.
 - **Code Formatting**: Uses `clang-format` for consistent styling.
 - **Static Analysis**: Runs `cppcheck` to detect potential issues early.
 - **File & Folder Naming Convention**: Ensures a consistent naming convention across the project.
