@@ -1,17 +1,17 @@
 #include "builder/multiple_choice_question.builder.h"
 
-auto getCorrectAnswerInstance() {
+static auto getCorrectAnswerInstance() {
     return MultipleChoiceAnswerBuilder::create()
         .setValue(MCQ_CORRECT_ANSWER_VALUE)
         .setDegree(MCQ_CORRECT_ANSWER_DEGREE)
         .build();
 }
 
-auto getStudentAnswerInstance() {
+static auto getStudentAnswerInstance() {
     return MultipleChoiceAnswerBuilder::create().build();
 }
 
-auto getQestionInstance() {
+static auto getQestionInstance() {
     return MultipleChoiceQuestionBuilder::create()
         .setText(MCQ_TEXT)
         .setCorrectAnswer(std::move(getCorrectAnswerInstance()))
