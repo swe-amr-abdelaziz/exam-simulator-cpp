@@ -1,5 +1,10 @@
 CXX = g++
-CXXFLAGS := -fdiagnostics-color=always -g -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -std=c++17
+CXXFLAGS := -fdiagnostics-color=always -g -pedantic-errors -std=c++17 -Wall -Wcast-align \
+            -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wdisabled-optimization -Weffc++ \
+						-Werror -Wextra -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations \
+						-Wmissing-include-dirs -Wno-unused -Wnoexcept -Wnull-dereference -Wold-style-cast \
+						-Woverloaded-virtual -Wredundant-decls -Wshadow=local -Wsign-conversion -Wsign-promo \
+						-Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef
 LDFLAGS := -lgtest -lgtest_main -lgmock -lgmock_main -pthread
 CCOV := -fprofile-arcs -ftest-coverage -O0
 
