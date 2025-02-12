@@ -14,8 +14,8 @@ static auto getStudentAnswerInstance() {
 static auto getQestionInstance() {
     return MultipleChoiceQuestionBuilder::create()
         .setText(MCQ_TEXT)
-        .setCorrectAnswer(std::move(getCorrectAnswerInstance()))
-        .setStudentAnswer(std::move(getStudentAnswerInstance()))
+        .setCorrectAnswer(getCorrectAnswerInstance())
+        .setStudentAnswer(getStudentAnswerInstance())
         .setChoices(CHOICES)
         .build();
 }

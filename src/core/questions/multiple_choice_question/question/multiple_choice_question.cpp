@@ -79,9 +79,8 @@ std::vector<std::string> MultipleChoiceQuestion::getChoices() const {
 }
 
 std::unique_ptr<MultipleChoiceQuestion> MultipleChoiceQuestion::clone() const {
-    return std::make_unique<MultipleChoiceQuestion>(this->text, std::move(this->correctAnswer->clone()),
-                                                    std::move(this->studentAnswer->clone()),
-                                                    this->choices);
+    return std::make_unique<MultipleChoiceQuestion>(this->text, this->correctAnswer->clone(),
+                                                    this->studentAnswer->clone(), this->choices);
 }
 
 std::tuple<std::string, std::vector<std::string>>
