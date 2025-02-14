@@ -36,11 +36,14 @@ jobs:
           name: cppcheck
           path: cppcheck.xml
 
+      - name: Build project with CMake
+        run: ./scripts/build_using_cmake.sh
+
       - name: Run unit tests
-        run: make test
+        run: cd build && ninja test
 
       - name: Run memory leak checks
-        run: make check_memory_leaks
+        run: cd build && ninja check_memory_leaks
 
       - name: Generate code coverage
         run: ./scripts/code_coverage.sh
