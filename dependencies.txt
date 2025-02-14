@@ -2,7 +2,10 @@ build-essential
 clang-format
 cmake
 cppcheck
+g++-10
 lcov
+libc6-dbg
 libgmock-dev
 libgtest-dev
+ninja-build
 valgrind
