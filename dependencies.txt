@@ -2,6 +2,7 @@ build-essential
 clang-format
 cmake
 cppcheck
+curl
 g++-10
 lcov
 libc6-dbg

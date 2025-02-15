@@ -27,6 +27,9 @@ jobs:
       - name: Check code formatting
         run: ./scripts/code_formatting_check.sh
 
+      - name: Install third-party libraries
+        run: ./scripts/install_third_party.sh
+
       - name: Static analysis with cppcheck
         run: cppcheck --enable=all --inconclusive --check-config --xml --xml-version=2 --suppress=missingIncludeSystem . 2> cppcheck.xml
 

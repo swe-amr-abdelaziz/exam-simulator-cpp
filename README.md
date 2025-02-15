@@ -10,10 +10,10 @@ It follows **object-oriented principles**, applies **design patterns**, and leve
 ### ✅ **Software Design Principles**
 
 - **Object-Oriented Programming (OOP)**: Utilizes **encapsulation, inheritance, polymorphism, and abstraction**.
+- **Dependency Injection**: Enhances modularity and testability by decoupling components and providing dependencies externally.
 - **Modularized Design**: Code is well-structured into **separate modules** for maintainability.
 - **Design Patterns**:
-  - **Builder Pattern**: Used for both **validators** and **question builders** to facilitate unit testing.
-- **Abstraction**: Applied to encapsulate complexity and expose only necessary functionality, following one of the core principles of OOP.
+  - **Builder Pattern**: Used to facilitate **object creation** for unit testing.
 
 ### 🛠 **Modern C++ Features**
 
