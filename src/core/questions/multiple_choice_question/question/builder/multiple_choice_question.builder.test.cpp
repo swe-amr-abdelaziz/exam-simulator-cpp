@@ -1,4 +1,9 @@
-#include "multiple_choice_question.builder.h"
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include <constants/test_defaults.h>
+#include <multiple_choice_question/answer/builder/multiple_choice_answer.builder.h>
+#include <multiple_choice_question/question/builder/multiple_choice_question.builder.h>
 
 // Static const variables
 static const std::string text = "What is the capital of the United States?";

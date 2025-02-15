@@ -1,10 +1,9 @@
 #ifndef MULTIPLE_CHOICE_QUESTION_VALIDATOR_H
 #define MULTIPLE_CHOICE_QUESTION_VALIDATOR_H
 
-#include "../../../../../shared/constants/enums.h"
-#include "../../answer/builder/multiple_choice_answer.builder.h"
-#include "../../answer/multiple_choice_answer.h"
-#include <unordered_set>
+#include <vector>
+
+#include <multiple_choice_question/answer/multiple_choice_answer.h>
 
 class MultipleChoiceQuestionValidator {
 public:

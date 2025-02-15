@@ -1,4 +1,13 @@
-#include "utils.h"
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include <constants/enums.h>
+#include <constants/messages.h>
+#include <constants/test_defaults.h>
+#include <utils/utils.h>
+
+using namespace Enums;
+using namespace TestDefaults;
 
 TEST(GetAppRunModeTest, given_no_argv_then_returns_normal) {
     int argc = 1;

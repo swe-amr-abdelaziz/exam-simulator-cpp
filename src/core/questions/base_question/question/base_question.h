@@ -1,10 +1,10 @@
 #ifndef BASE_QUESTION_H
 #define BASE_QUESTION_H
 
-#include "../../../../shared/constants/enums.h"
-#include "../../../../shared/interfaces/quesiton.interface.h"
-#include "../answer/base_answer.h"
 #include <memory>
+
+#include <constants/enums.h>
+#include <interfaces/quesiton.interface.h>
 
 template <class T>
 class Question : public IQuestion {

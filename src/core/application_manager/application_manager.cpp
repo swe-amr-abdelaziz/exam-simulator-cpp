@@ -1,4 +1,12 @@
-#include "application_manager.h"
+#include <gtest/gtest.h>
+#include <memory>
+#include <stdexcept>
+
+#include <application_manager/application_manager.h>
+#include <constants/enums.h>
+#include <constants/messages.h>
+
+using namespace Enums;
 
 ApplicationManager::ApplicationManager(RunMode runMode) : runMode(runMode) {}
 

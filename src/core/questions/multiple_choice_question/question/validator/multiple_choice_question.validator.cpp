@@ -1,4 +1,9 @@
-#include "multiple_choice_question.validator.h"
+#include <algorithm>
+#include <unordered_set>
+
+#include <constants/enums.h>
+#include <constants/messages.h>
+#include <multiple_choice_question/question/validator/multiple_choice_question.validator.h>
 
 std::string MultipleChoiceQuestionValidator::validateText(const std::string& text) {
     if (text.empty()) {

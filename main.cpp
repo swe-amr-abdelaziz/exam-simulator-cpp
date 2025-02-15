@@ -1,4 +1,8 @@
-#include "src/core/application_manager/application_manager.h"
+#include <memory>
+
+#include <application_manager/application_manager.h>
+#include <constants/enums.h>
+#include <utils/utils.h>
 
 int main(int argc, char* argv[]) {
     try {

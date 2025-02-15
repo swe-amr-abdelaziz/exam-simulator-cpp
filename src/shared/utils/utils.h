@@ -1,20 +1,12 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "../constants/enums.h"
-#include "../constants/messages.h"
-#include "../constants/test_defaults.h"
+#include <cstdint>
+
 #include "utils.template.cpp"
-#include <algorithm>
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
-#include <iostream>
-#include <random>
-#include <sstream>
-#include <string>
-#include <vector>
+#include <constants/enums.h>
+
 using namespace Enums;
-using namespace TestDefaults;
 
 class Utils {
 public:

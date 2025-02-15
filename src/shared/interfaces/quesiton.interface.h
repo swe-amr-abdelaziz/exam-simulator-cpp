@@ -1,8 +1,6 @@
 #ifndef IQUESTION_H
 #define IQUESTION_H
 
-#include <string>
-
 class IQuestion {
 public:
     virtual ~IQuestion() = default;

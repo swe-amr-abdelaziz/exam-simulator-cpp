@@ -1,4 +1,8 @@
-#include "application_manager.h"
+#include <gtest/gtest.h>
+
+#include <application_manager/application_manager.h>
+#include <constants/enums.h>
+#include <constants/messages.h>
 
 TEST(ApplicationManagerTest, given_invalid_run_mode_when_run_then_throw) {
 #pragma GCC diagnostic push

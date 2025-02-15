@@ -1,4 +1,4 @@
-#include "multiple_choice_answer.builder.h"
+#include <multiple_choice_question/answer/builder/multiple_choice_answer.builder.h>
 
 MultipleChoiceAnswerBuilder MultipleChoiceAnswerBuilder::create() {
     return MultipleChoiceAnswerBuilder();

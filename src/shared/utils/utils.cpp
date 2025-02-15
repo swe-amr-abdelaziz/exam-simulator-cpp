@@ -1,6 +1,11 @@
-#include "utils.h"
+#include <algorithm>
+#include <random>
 
-RunMode Utils::getAppRunMode(const int& argc, char* argv[]) {
+#include <constants/enums.h>
+#include <constants/messages.h>
+#include <utils/utils.h>
+
+Enums::RunMode Utils::getAppRunMode(const int& argc, char* argv[]) {
     if (argc > 1) {
         std::string mode = argv[1];
         if (mode.compare(RUN_MODES.find(RunMode::TEST)->second) == 0) {

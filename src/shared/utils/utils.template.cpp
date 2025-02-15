@@ -1,9 +1,4 @@
-#include <functional>
 #include <gtest/gtest.h>
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <type_traits>
 
 static std::string restoreInputAndCaptureOutput(std::streambuf* cinBuffer) {
     std::cin.rdbuf(cinBuffer);

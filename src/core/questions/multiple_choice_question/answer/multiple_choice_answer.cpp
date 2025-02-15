@@ -1,4 +1,5 @@
-#include "multiple_choice_answer.h"
+#include <multiple_choice_question/answer/multiple_choice_answer.h>
+#include <multiple_choice_question/answer/validator/multiple_choice_answer.validator.h>
 
 MultipleChoiceAnswer::MultipleChoiceAnswer(std::optional<uint8_t> value, std::optional<double> degree)
     : Answer<uint8_t, double>() {

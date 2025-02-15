@@ -1,7 +1,7 @@
 #ifndef MULTIPLE_CHOICE_ANSWER_VALIDATOR_H
 #define MULTIPLE_CHOICE_ANSWER_VALIDATOR_H
 
-#include "../../../../../shared/utils/utils.h"
+#include <cstdint>
 
 class MultipleChoiceAnswerValidator {
 public:

@@ -1,7 +1,8 @@
 #ifndef MULTIPLE_CHOICE_QUESTION_BUILDER_H
 #define MULTIPLE_CHOICE_QUESTION_BUILDER_H
 
-#include "../multiple_choice_question.h"
+#include <interfaces/builder.interface.h>
+#include <multiple_choice_question/question/multiple_choice_question.h>
 
 class MultipleChoiceQuestionBuilder : public IBuilder<std::unique_ptr<MultipleChoiceQuestion>> {
 public:

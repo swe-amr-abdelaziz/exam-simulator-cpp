@@ -1,4 +1,6 @@
-#include "multiple_choice_answer.builder.h"
+#include <gtest/gtest.h>
+
+#include <multiple_choice_question/answer/builder/multiple_choice_answer.builder.h>
 
 // Static const variables
 static const uint8_t value = 1;

@@ -4,6 +4,7 @@ project(exam_simulator LANGUAGES CXX)
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(Threads REQUIRED)
 
@@ -12,6 +13,10 @@ file(GLOB TOP_LEVEL_CPP "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 file(GLOB_RECURSE SRC_CPP "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 set(SOURCES ${TOP_LEVEL_CPP} ${SRC_CPP})
+
+include_directories(src/core)
+include_directories(src/core/questions)
+include_directories(src/shared)
 
 add_executable(exam_simulator ${SOURCES})
 

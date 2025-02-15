@@ -1,4 +1,7 @@
-#include "multiple_choice_question.h"
+#include <constants/messages.h>
+#include <multiple_choice_question/question/multiple_choice_question.h>
+#include <multiple_choice_question/question/validator/multiple_choice_question.validator.h>
+#include <utils/utils.h>
 
 MultipleChoiceQuestion::MultipleChoiceQuestion(std::string text,
                                                std::unique_ptr<MultipleChoiceAnswer> correctAnswer,

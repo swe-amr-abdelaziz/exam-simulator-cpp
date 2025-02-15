@@ -1,4 +1,6 @@
-#include "multiple_choice_answer.h"
+#include <gtest/gtest.h>
+
+#include <multiple_choice_question/answer/multiple_choice_answer.h>
 
 TEST(MultipleChoiceAnswerDefaultValuesTest, initialize_multiple_choice_answer_with_no_value_and_no_degree) {
     auto answer = std::make_unique<MultipleChoiceAnswer>();

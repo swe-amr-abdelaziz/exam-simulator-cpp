@@ -1,4 +1,13 @@
-#include "multiple_choice_question.validator.h"
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include <constants/enums.h>
+#include <constants/messages.h>
+#include <constants/test_defaults.h>
+#include <multiple_choice_question/answer/builder/multiple_choice_answer.builder.h>
+#include <multiple_choice_question/question/validator/multiple_choice_question.validator.h>
+
+using namespace TestDefaults;
 
 TEST(ValidateTextTest, should_throw_exception_when_text_is_empty) {
     EXPECT_THROW(

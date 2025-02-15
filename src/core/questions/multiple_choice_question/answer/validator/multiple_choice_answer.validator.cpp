@@ -1,4 +1,6 @@
-#include "multiple_choice_answer.validator.h"
+#include <constants/messages.h>
+#include <multiple_choice_question/answer/validator/multiple_choice_answer.validator.h>
+#include <utils/utils.h>
 
 uint8_t MultipleChoiceAnswerValidator::validateValue(const uint8_t& value) {
     if (value > Utils::convertChoiceCharToIndex('Z')) {

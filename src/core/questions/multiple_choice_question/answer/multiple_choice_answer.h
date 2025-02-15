@@ -1,9 +1,8 @@
 #ifndef MULTIPLE_CHOICE_ANSWER_H
 #define MULTIPLE_CHOICE_ANSWER_H
 
-#include "../../../../shared/interfaces/cloneable.interface.h"
-#include "../../base_question/answer/base_answer.h"
-#include "validator/multiple_choice_answer.validator.h"
+#include <base_question/answer/base_answer.h>
+#include <interfaces/cloneable.interface.h>
 
 class MultipleChoiceAnswer : public Answer<uint8_t, double>, public ICloneable<MultipleChoiceAnswer> {
 public:

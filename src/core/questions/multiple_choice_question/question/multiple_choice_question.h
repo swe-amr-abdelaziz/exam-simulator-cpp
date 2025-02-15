@@ -1,12 +1,8 @@
 #ifndef MULTIPLE_CHOICE_QUESTION_H
 #define MULTIPLE_CHOICE_QUESTION_H
 
-#include "../../../../shared/utils/utils.h"
-#include "../../base_question/question/base_question.h"
-#include "../answer/multiple_choice_answer.h"
-#include "validator/multiple_choice_question.validator.h"
-#include <tuple>
-#include <vector>
+#include <base_question/question/base_question.h>
+#include <multiple_choice_question/answer/multiple_choice_answer.h>
 
 class MultipleChoiceQuestion : public Question<MultipleChoiceAnswer>, ICloneable<MultipleChoiceQuestion> {
 public:

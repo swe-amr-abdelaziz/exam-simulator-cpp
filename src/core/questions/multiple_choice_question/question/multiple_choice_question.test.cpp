@@ -1,4 +1,13 @@
-#include "builder/multiple_choice_question.builder.h"
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include <constants/messages.h>
+#include <constants/test_defaults.h>
+#include <multiple_choice_question/answer/builder/multiple_choice_answer.builder.h>
+#include <multiple_choice_question/question/builder/multiple_choice_question.builder.h>
+#include <utils/utils.h>
+
+using namespace TestDefaults;
 
 static auto getCorrectAnswerInstance() {
     return MultipleChoiceAnswerBuilder::create()
